@@ -48,15 +48,31 @@
     "vite": "^5.2.3"
   },
   "eslintConfig": {
-    "root": true
+    "root": true,
+    "plugins": [
+      "react-hooks"
+    ],
+    "env": {
+      "browser": true,
+      "es2022": true,
+      "node": true
+    },
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    }
   },
   "name": "toppers_trust",
   "private": true,
   "scripts": {
     "dev": "vite",
-    "backend": "node server.js",
+    "backend": "node --env-file-if-exists=.env server.js",
     "dev:full": "concurrently \"npm run backend\" \"npm run dev\"",
     "build": "vite build",
+    "lint": "eslint src api server.js --ext .js,.jsx",
     "preview": "vite preview"
   },
   "version": "0.1.0"

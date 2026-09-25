@@ -1,8 +1,8 @@
 import React from 'react';
 import { supabase } from '../../supabase.js';
 
-const BACKEND_URL = 'http://localhost:3000';
-const INITIATE_PAYMENT_ENDPOINT = `${BACKEND_URL}/api/payment/initiate`;
+// Vite proxies this path locally and Vercel serves it as a same-origin function.
+const INITIATE_PAYMENT_ENDPOINT = '/api/payment/initiate';
 
 
 export async function getAuthUser() {

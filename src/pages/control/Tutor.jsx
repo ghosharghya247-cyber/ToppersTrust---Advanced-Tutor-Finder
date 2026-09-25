@@ -48,7 +48,7 @@ export default function TutorController() {
                     return;
                 }
 
-                const { profile, error: profileError } = await fetchTutorProfileByUserId(user.id);
+                const { profile, error: profileError } = await fetchTutorProfileByUserId(user);
                 if (profileError) {
                     if (profileError?.code === 'PGRST116') {
                         if (mounted) setError('Tutor profile not found. Please complete your profile.');

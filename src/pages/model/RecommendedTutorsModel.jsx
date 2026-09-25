@@ -34,28 +34,10 @@ class RecommendedTutorsModel {
                 if (acceptedData) acceptedData.forEach(item => alreadyAcceptedTutorIds.add(item.tutor_id));
             }
 
-            // JOIN: Get tutor details via id2
+            // Fetch references first, then read display-safe data from tutor_card.
             let query = supabase
                 .from('recommendedtutors')
-                .select(`
-                    id,
-                    id2,
-                    tutor:tutor!id2 (
-                        id,
-                        name,
-                        photo,
-                        experience_years,
-                        qualification,
-                        rating,
-                        ssc_grade,
-                        hsc_grade,
-                        uni,
-                        uni_grade,
-                        preferred_areas,
-                        expected_salary,
-                        available_time
-                    )
-                `);
+                .select('id, id2');
 
             if (isRecommendedOnly) {
                 query = query.not('id2', 'is', null);
@@ -64,10 +46,21 @@ class RecommendedTutorsModel {
             const { data: results, error: fetchError } = await query;
             if (fetchError) throw fetchError;
 
+            const tutorIds = (results || []).map(item => item.id2).filter(Boolean);
+            if (tutorIds.length === 0) return [];
+
+            const { data: tutorRows, error: tutorError } = await supabase
+                .from('tutor_card')
+                .select('*')
+                .in('id', tutorIds);
+            if (tutorError) throw tutorError;
+
+            const tutorById = new Map((tutorRows || []).map(tutor => [tutor.id, tutor]));
+
             return results
-                .filter(item => item.tutor && !alreadyAcceptedTutorIds.has(item.tutor.id))
-                .map(item => {
-                    const t = item.tutor;
+                .map(item => ({ item, tutor: tutorById.get(item.id2) }))
+                .filter(({ tutor }) => tutor && !alreadyAcceptedTutorIds.has(tutor.id))
+                .map(({ item, tutor: t }) => {
                     let imageUrl = null;
                     if (t.photo) {
                         const { data: publicUrlData } = supabase.storage.from('photo').getPublicUrl(t.photo);

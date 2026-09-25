@@ -34,6 +34,7 @@ export async function signUpUserWithProfile(formData) {
             full_name: formData.name,
             phone: formData.phone,
             city: formData.city,
+            gender: formData.gender,
             user_role: formData.role,
         };
 
@@ -58,22 +59,28 @@ export async function signUpUserWithProfile(formData) {
                 city: formData.city,
                 address: formData.location || null,
             };
+            // Without a session (email confirmation enabled), RLS correctly
+            // prevents a client-side insert. The database Auth trigger creates
+            // the row; the dashboard also repairs older accounts after login.
+            if (!data.session) {
+                return { success: true, message: 'Sign up successful! Please check your email to verify your account.', data };
+            }
 
             let profileCreationError = null;
             let tableName = '';
 
             if (formData.role === 'teacher') {
                 tableName = 'tutor';
-                const { error } = await supabase.from(tableName).insert([{ ...baseProfileData, gender: formData.gender }]);
+                const { error } = await supabase.from(tableName).upsert({ ...baseProfileData, gender: formData.gender }, { onConflict: 'user_id' });
                 if (error) profileCreationError = error;
             } else if (formData.role === 'guardian') {
                 tableName = 'guardian';
-                const { error } = await supabase.from(tableName).insert([baseProfileData]);
+                const { error } = await supabase.from(tableName).upsert(baseProfileData, { onConflict: 'user_id' });
                 if (error) profileCreationError = error;
             } else if (formData.role === 'media') {
                 // *** UPDATED: Using 'media' table name as confirmed by user ***
                 tableName = 'media'; 
-                const { error } = await supabase.from(tableName).insert([baseProfileData]);
+                const { error } = await supabase.from(tableName).upsert(baseProfileData, { onConflict: 'user_id' });
                 if (error) profileCreationError = error;
             }
 

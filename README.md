@@ -68,9 +68,14 @@ ToppersTrust is a full-stack web application built with:
 3. **Configure environment variables**
    - Create a `.env` file in the project root with your Supabase credentials:
    ```
-   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_URL=https://your-project-ref.supabase.co
    VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   SSLCOMMERZ_STORE_ID=your_sslcommerz_store_id
+   SSLCOMMERZ_STORE_PASS=your_sslcommerz_store_password
+   FRONTEND_URL=http://localhost:5173
    ```
+
+   Use the Supabase project root URL, not a URL ending in `/rest/v1`.
 
 4. **Start the development server**
    ```bash
@@ -127,7 +132,7 @@ SSLCommerz integration enables secure online payments for:
 # Development
 npm run dev:full      # Run both frontend and backend servers
 npm run dev           # Run frontend only
-npm run server        # Run backend server only
+npm run backend       # Run backend server only
 
 # Build
 npm run build         # Build for production

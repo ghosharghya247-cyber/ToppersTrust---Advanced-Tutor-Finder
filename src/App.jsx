@@ -6,13 +6,9 @@ import {
   useLocation,
 } from "react-router-dom";
 
-const LoadingFallback = () => (
-  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#1e293b', color: 'white' }}>
-    Loading...
-  </div>
-);
-
-
+import SiteShell from './components/ui/SiteShell';
+import { LoadingState } from './components/ui/Primitives';
+const LoadingFallback = () => <LoadingState />;
 
 // General Pages
 const LandingPage = lazy(() => import("./pages/control/LandingPageController"));
@@ -120,10 +116,11 @@ function App() {
   }, [pathname]);
 
   return (
-    <Suspense fallback={<LoadingFallback />}>
+    <SiteShell><Suspense fallback={<LoadingFallback />}>
       <Routes>
         {/* General Pages */}
         <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LandingPage />} />
         <Route path="/sign-up-frame" element={<SignUpFrame />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
 
@@ -161,8 +158,11 @@ function App() {
         {/* Admin Specific Routes */}
         <Route path="/admin-portal" element={<AdminPortal />} />
 
+        {/* Keep unknown/bookmarked URLs from rendering a blank page. */}
+        <Route path="*" element={<LandingPage />} />
+
       </Routes>
-    </Suspense>
+    </Suspense></SiteShell>
   );
 }
 export default App;

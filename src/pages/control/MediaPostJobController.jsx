@@ -128,7 +128,7 @@ const PostJobController = () => {
     };
 
     const handleBack = () => {
-        navigate('/media');
+        navigate('/media-dashboard');
     };
 
     return (

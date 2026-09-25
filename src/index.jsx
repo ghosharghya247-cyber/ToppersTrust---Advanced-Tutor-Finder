@@ -12,7 +12,7 @@ import {
 
 import "./global.css";
 
-const muiTheme = createTheme();
+const muiTheme = createTheme({ palette: { primary: { main: '#234e3f' }, secondary: { main: '#a95135' }, background: { default: '#f8f7f2' } }, typography: { fontFamily: "'DM Sans', Arial, sans-serif" }, shape: { borderRadius: 8 } });
 
 const container = document.getElementById("root");
 const root = createRoot(container);

@@ -35,7 +35,7 @@ const PostJobController = () => {
   const handleInputChange = useCallback(
     (e) => {
       const { name, value, maxLength } = e.target;
-      if (maxLength && value.length > maxLength) {
+      if (maxLength > 0 && value.length > maxLength) {
         return;
       }
       setFormData((prev) => ({ ...prev, [name]: value }));

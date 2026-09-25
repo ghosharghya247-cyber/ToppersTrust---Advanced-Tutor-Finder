@@ -36,3 +36,6 @@ pids
 Thumbs.db
   
 .env
+
+# Vite production output
+/dist

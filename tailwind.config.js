@@ -15,7 +15,7 @@ module.exports = {
         "Colors-Blue": "#007aff",
         gray: {
           "100": "#fafafa",
-          "200": "#2c2b38",
+          "200": "#e5e7eb",
         },
         black: "#000",
         cadetblue: {
@@ -66,11 +66,11 @@ module.exports = {
     fontFamily: {
       // This sets 'Roboto' as the default font for your entire website.
       // Any text element will now use Roboto automatically.
-      sans: ['Roboto', 'sans-serif'],
+      sans: ['DM Sans', 'Arial', 'sans-serif'],
 
       // (Optional) You can keep a second font for special, large headings.
       // To use it, you would add the class "font-display" to a heading element.
-      display: ['Oswald', 'sans-serif'],
+      display: ['Lora', 'Georgia', 'serif'],
     },
 
       borderRadius: {
@@ -218,43 +218,43 @@ module.exports = {
     },
     // --- Your other theme properties outside of 'extend' ---
     fontWeight: {
+      thin: "100", extralight: "200", light: "300", normal: "400", medium: "500", semibold: "600", bold: "700", extrabold: "800", black: "900",
       "Body-Font-Weight-Regular": "400",
       "Body-Font-Weight-Strong": "600",
     },
     fontSize: {
-      "Body-Size-Medium": "1rem",
-      "Display-Large-Size": "3.563rem",
-      mini: "0.938rem",
-      mid: "1.063rem",
-      base: "1rem",
-      "38xl": "3.563rem",
-      sm: "0.875rem",
-      "17xl": "2.25rem",
-      "3xl": "1.375rem",
-      "10xl": "1.813rem",
-      "5xl": "1.5rem",
-      lgi: "1.188rem",
-      lg: "1.125rem",
-      xs: "0.75rem",
-      "29xl": "3rem",
-      "19xl": "2.375rem",
-      "8xl": "1.688rem",
-      xl: "1.25rem",
-      "6xl": "1.563rem",
-      "16xl": "2.188rem",
-      "4xl": "1.438rem",
-      "11xl": "1.875rem",
-      "7xl": "1.625rem",
-      "2xl": "1.313rem",
+      "Body-Size-Medium": "1.125rem",
+      "Display-Large-Size": "3.688rem",
+      mini: "1.063rem",
+      mid: "1.188rem",
+      base: "1.125rem",
+      "38xl": "3.688rem",
+      sm: "1rem",
+      "17xl": "2.375rem",
+      "3xl": "1.5rem",
+      "10xl": "1.938rem",
+      "5xl": "1.625rem",
+      lgi: "1.313rem",
+      lg: "1.25rem",
+      xs: "0.875rem",
+      "29xl": "3.125rem",
+      "19xl": "2.5rem",
+      "8xl": "1.813rem",
+      xl: "1.375rem",
+      "6xl": "1.688rem",
+      "16xl": "2.313rem",
+      "4xl": "1.563rem",
+      "11xl": "2rem",
+      "7xl": "1.75rem",
+      "2xl": "1.438rem",
       inherit: "inherit",
     },
     screens: {
+      sm: "640px", md: "768px", xl: "1280px", "2xl": "1536px",
       mq1325: {
         raw: "screen and (max-width: 1325px)",
       },
-      lg: {
-        max: "1200px",
-      },
+      lg: "1024px",
       mq1125: {
         raw: "screen and (max-width: 1125px)",
       },

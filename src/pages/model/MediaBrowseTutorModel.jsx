@@ -13,7 +13,7 @@ export const MediaBrowseTutorModel = {
 
     async fetchTutors() {
         const { data: allTutors, error } = await supabase
-            .from('tutor')
+            .from('tutor_card')
             .select('*')
             .order('id', { ascending: false });
 

@@ -15,13 +15,44 @@ export async function getAuthUser() {
  * Fetch tutor profile by user_id.
  * Returns { profile, error }
  */
-export async function fetchTutorProfileByUserId(userId) {
+export async function fetchTutorProfileByUserId(user) {
+    const userId = typeof user === 'string' ? user : user?.id;
+    if (!userId) {
+        return { profile: null, error: new Error('A user ID is required to load the tutor profile.') };
+    }
+
     const { data, error } = await supabase
         .from('tutor')
         .select('id, name, photo')
         .eq('user_id', userId)
+        .maybeSingle();
+
+    if (error || data) return { profile: data ?? null, error };
+
+    // Older signups could create the Auth user but fail to create the profile
+    // because email confirmation left no session for the RLS-protected insert.
+    const authUser = typeof user === 'string'
+        ? (await supabase.auth.getUser()).data.user
+        : user;
+    const role = authUser?.user_metadata?.user_role;
+    if (!authUser || authUser.id !== userId || !['teacher', 'tutor'].includes(role)) {
+        return { profile: null, error: null };
+    }
+
+    const fallbackName = authUser.user_metadata?.full_name || authUser.email?.split('@')[0] || 'Tutor';
+    const { data: repairedProfile, error: repairError } = await supabase
+        .from('tutor')
+        .upsert({
+            user_id: userId,
+            name: fallbackName,
+            email: authUser.email,
+            phone: authUser.user_metadata?.phone || null,
+            gender: authUser.user_metadata?.gender || null,
+        }, { onConflict: 'user_id' })
+        .select('id, name, photo')
         .single();
-    return { profile: data ?? null, error };
+
+    return { profile: repairedProfile ?? null, error: repairError };
 }
 
 /**
