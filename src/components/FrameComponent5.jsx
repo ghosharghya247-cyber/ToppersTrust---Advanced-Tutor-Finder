@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 const FrameComponent5 = ({ className = "" }) => {
   return (
     <div
-      className={`self-stretch flex flex-col items-start justify-start gap-[2.375rem] max-w-full text-left text-[1rem] text-[#000] font-roboto mq450:gap-[1.188rem] ${className}`}
+      className={`self-stretch flex flex-col items-start justify-start gap-[2.375rem] max-w-full text-left text-[1rem] text-[var(--text-primary)] font-roboto mq450:gap-[1.188rem] ${className}`}
     >
       <FrameComponent4 />
       <div className="self-stretch flex flex-col items-start justify-start pt-[0rem] px-[0rem] pb-[1.243rem] box-border gap-[1.718rem] max-w-full">

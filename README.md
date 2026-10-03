@@ -72,6 +72,7 @@ ToppersTrust is a full-stack web application built with:
    VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
    SSLCOMMERZ_STORE_ID=your_sslcommerz_store_id
    SSLCOMMERZ_STORE_PASS=your_sslcommerz_store_password
+   # Origin only; do not include /tutor-dashboard or another route.
    FRONTEND_URL=http://localhost:5173
    ```
 

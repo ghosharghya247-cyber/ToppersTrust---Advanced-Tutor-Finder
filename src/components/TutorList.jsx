@@ -11,7 +11,7 @@ const TutorList = ({ className = "" }) => {
 
   return (
     <div
-      className={`absolute top-[13.625rem] left-[25.938rem] w-[50.338rem] h-[50.338rem] flex flex-row items-end justify-start pt-[11.687rem] pb-[0.712rem] pl-[18.25rem] pr-[9rem] box-border gap-[3.625rem] max-w-full text-left text-[0.875rem] text-[#000] font-oswald mq675:flex-wrap ${className}`}
+      className={`absolute top-[13.625rem] left-[25.938rem] w-[50.338rem] h-[50.338rem] flex flex-row items-end justify-start pt-[11.687rem] pb-[0.712rem] pl-[18.25rem] pr-[9rem] box-border gap-[3.625rem] max-w-full text-left text-[0.875rem] text-[var(--text-primary)] font-oswald mq675:flex-wrap ${className}`}
     >
       <img
         className="w-full absolute !!m-[0 important] h-full top-[0rem] right-[0rem] bottom-[0rem] left-[0rem] rounded-mini max-w-full overflow-hidden max-h-full object-contain"
@@ -32,7 +32,7 @@ const TutorList = ({ className = "" }) => {
       <div className="self-stretch flex-1 flex flex-col items-start justify-start text-[1.5rem] font-roboto">
         <div className="self-stretch h-[18.125rem] relative">
           <div
-            className="absolute top-[0rem] left-[0rem] shadow-[0px_4px_20px_10px_rgba(0,_0,_0,_0.25)] rounded-3xs [background:linear-gradient(rgba(117,_117,_117,_0.7),_rgba(117,_117,_117,_0.7)),_linear-gradient(rgba(0,_0,_0,_0.2),_rgba(0,_0,_0,_0.2)),_#d9d9d9] border-[#3b394d] border-solid border-[1px] box-border w-full h-full cursor-pointer z-[2]"
+            className="absolute top-[0rem] left-[0rem] shadow-[0px_4px_20px_10px_rgba(0,_0,_0,_0.25)] rounded-3xs [background:linear-gradient(var(--text-secondary),_var(--text-secondary)),_linear-gradient(rgba(0,_0,_0,_0.2),_rgba(0,_0,_0,_0.2)),_var(--border)] border-[var(--text-primary)] border-solid border-[1px] box-border w-full h-full cursor-pointer z-[2]"
             onClick={onButtonBackgroundClick}
           />
           <h2

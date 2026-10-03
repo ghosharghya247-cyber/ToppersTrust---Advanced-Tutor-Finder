@@ -10,7 +10,7 @@ const TermsAndConditions = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gray-50 text-[#000] font-roboto flex flex-col items-center px-4 sm:px-6 lg:px-8 py-8">
+    <div className="w-full min-h-screen bg-surface-subtle text-text-primary font-roboto flex flex-col items-center px-4 sm:px-6 lg:px-8 py-8">
       <header className="w-full max-w-5xl fixed top-0 left-1/2 transform -translate-x-1/2 bg-white/80 backdrop-blur-md shadow-md py-3 px-4 sm:px-6 z-50 flex items-center justify-between">
         <div className="flex items-center">
           <img
@@ -18,13 +18,13 @@ const TermsAndConditions = () => {
             alt="Toppers Trust Logo"
             className="h-10 w-10 sm:h-12 sm:w-12 object-contain mr-3"
           />
-          <h1 className="text-[1.5rem] sm:text-[1.75rem] font-oswald text-[#40919e] hidden sm:block">
+          <h1 className="text-[1.5rem] sm:text-[1.75rem] font-oswald text-primary hidden sm:block">
             TOPPERS TRUST
           </h1>
         </div>
         <button
           onClick={handleGoBack}
-          className="flex items-center bg-[#6344cc] text-white hover:bg-[#5238a8] px-3 py-1.5 sm:px-4 sm:py-2 rounded-md text-sm sm:text-base font-medium transition-colors"
+          className="flex items-center bg-primary text-white hover:bg-primary-hover px-3 py-1.5 sm:px-4 sm:py-2 rounded-md text-sm sm:text-base font-medium transition-colors"
         >
           <IoChevronBack className="mr-1 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5" />
           Back

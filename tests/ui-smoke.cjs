@@ -352,6 +352,17 @@ async function main() {
     assert.equal(await page.getByLabel("How did you find us?").count(), 0);
     assert.equal(await page.getByLabel("Drive Link (Optional)").count(), 0);
     await authenticate(page, "teacher");
+    await goto(
+      page,
+      "/tutor-dashboard?payment=cancelled",
+      "Make a little difference.",
+    );
+    await page
+      .getByRole("alert")
+      .filter({ hasText: "Payment was cancelled" })
+      .waitFor();
+    assert.equal(new URL(page.url()).pathname, "/tutor-dashboard");
+    assert.equal(new URL(page.url()).search, "");
     await goto(page, "/job-card", "Find your next tuition.");
     await page.getByRole("button", { name: "Apply for tuition" }).waitFor();
     failureTable = "apply_job";

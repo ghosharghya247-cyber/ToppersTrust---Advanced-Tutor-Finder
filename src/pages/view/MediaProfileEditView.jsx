@@ -93,11 +93,11 @@ const MediaProfileEditView = ({
 
   // Generate fallback image
   const profileImageFallback = formData.name
-    ? `https://placehold.co/200x200/6344cc/FFF?text=${formData.name
+    ? `https://placehold.co/200x200/1769F5/FFF?text=${formData.name
         .split(" ")
         .map((n) => n[0])
         .join("")}`
-    : "https://placehold.co/200x200/6344cc/FFF?text=M";
+    : "https://placehold.co/200x200/1769F5/FFF?text=M";
 
   return (
     <div className="page-container profile-editor">
@@ -168,7 +168,7 @@ const MediaProfileEditView = ({
                   value={formData.name || ""}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#234e3f]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -204,7 +204,7 @@ const MediaProfileEditView = ({
                   value={formData.contactNumber || ""}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#234e3f]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="Enter contact number"
                 />
               </div>
@@ -223,7 +223,7 @@ const MediaProfileEditView = ({
                   value={formData.city || ""}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#234e3f]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="Enter your city"
                 />
               </div>
@@ -242,7 +242,7 @@ const MediaProfileEditView = ({
                   onChange={handleInputChange}
                   required
                   rows="3"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#234e3f]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="Enter your full address"
                 />
               </div>
@@ -260,7 +260,7 @@ const MediaProfileEditView = ({
                   name="facebookProfile"
                   value={formData.facebookProfile || ""}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#234e3f]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="https://facebook.com/yourprofile"
                 />
               </div>
@@ -280,7 +280,7 @@ const MediaProfileEditView = ({
             <button
               type="submit"
               disabled={isSaving}
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-[#234e3f] text-white rounded-lg hover:bg-[#173b2e] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSaving ? (
                 <>

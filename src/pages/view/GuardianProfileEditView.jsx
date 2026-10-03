@@ -98,8 +98,8 @@ const GuardianProfileView = () => {
 
     // Generate fallback image
     const profileImageFallback = profileData?.name 
-        ? `https://placehold.co/200x200/6344cc/FFF?text=${profileData.name.split(' ').map(n=>n[0]).join('')}`
-        : "https://placehold.co/200x200/6344cc/FFF?text=G";
+        ? `https://placehold.co/200x200/1769F5/FFF?text=${profileData.name.split(' ').map(n=>n[0]).join('')}`
+        : "https://placehold.co/200x200/1769F5/FFF?text=G";
 
     // Loading state
     if (loading) {
@@ -124,7 +124,7 @@ const GuardianProfileView = () => {
                         <p className="text-gray-600 mb-6">{error}</p>
                         <button
                             onClick={() => controller.loadProfile()}
-                            className="bg-[#6344cc] text-white px-6 py-2 rounded-lg hover:bg-[#5238a8] transition-colors"
+                            className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-hover transition-colors"
                         >
                             Retry
                         </button>
@@ -144,7 +144,7 @@ const GuardianProfileView = () => {
                     <div className="flex gap-3">
                         <button
                             onClick={handleEditProfile}
-                            className="flex items-center gap-2 bg-[#6344cc] text-white px-6 py-2.5 rounded-lg hover:bg-[#5238a8] transition-colors shadow-lg font-medium"
+                            className="flex items-center gap-2 bg-primary text-white px-6 py-2.5 rounded-lg hover:bg-primary-hover transition-colors shadow-lg font-medium"
                         >
                             <FaEdit /> Edit Profile
                         </button>
@@ -170,7 +170,7 @@ const GuardianProfileView = () => {
                                         e.target.onerror = null; 
                                         e.target.src = profileImageFallback; 
                                     }}
-                                    className="w-40 h-40 rounded-full border-4 border-[#6344cc] shadow-lg object-cover mb-4"
+                                    className="w-40 h-40 rounded-full border-4 border-primary shadow-lg object-cover mb-4"
                                 />
                                 <h2 className="text-2xl font-bold text-gray-800 text-center">
                                     {profileData?.name || "Guardian"}
@@ -207,7 +207,7 @@ const GuardianProfileView = () => {
                         {/* Contact Information Section */}
                         <div className="bg-white p-6 rounded-xl shadow-lg">
                             <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-200">
-                                <FaUser className="text-[#6344cc] text-xl" />
+                                <FaUser className="text-primary text-xl" />
                                 <h3 className="text-xl font-semibold text-gray-800">Contact Information</h3>
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -241,7 +241,7 @@ const GuardianProfileView = () => {
                         {/* Social & Additional Information Section */}
                         <div className="bg-white p-6 rounded-xl shadow-lg">
                             <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-200">
-                                <FaUsers className="text-[#6344cc] text-xl" />
+                                <FaUsers className="text-primary text-xl" />
                                 <h3 className="text-xl font-semibold text-gray-800">Additional Information</h3>
                             </div>
                             <div className="grid grid-cols-1 gap-4">

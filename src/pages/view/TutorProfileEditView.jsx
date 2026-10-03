@@ -27,7 +27,7 @@ const InputField = ({
   required = false,
   placeholder = "",
   readOnly = false,
-  focusRingColor = "focus:ring-[#234e3f]",
+  focusRingColor = "focus:ring-primary",
   ...props
 }) => (
   <div>
@@ -64,7 +64,7 @@ const SelectField = ({
   onChange,
   options,
   required = false,
-  focusRingColor = "focus:ring-[#234e3f]",
+  focusRingColor = "focus:ring-primary",
   ...props
 }) => (
   <div>
@@ -82,7 +82,7 @@ const SelectField = ({
       onChange={onChange}
       required={required}
       {...props}
-      className={`w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-1 ${focusRingColor} focus:border-[#234e3f] text-sm`}
+      className={`w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-1 ${focusRingColor} focus:border-primary text-sm`}
     >
       {options.map((optionObj) => (
         <option key={optionObj.value} value={optionObj.value}>
@@ -100,7 +100,7 @@ const TextAreaField = ({
   onChange,
   rows = 3,
   placeholder = "",
-  focusRingColor = "focus:ring-[#234e3f]",
+  focusRingColor = "focus:ring-primary",
   ...props
 }) => (
   <div>
@@ -118,7 +118,7 @@ const TextAreaField = ({
       rows={rows}
       placeholder={placeholder}
       {...props}
-      className={`w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 ${focusRingColor} focus:border-[#234e3f] text-sm`}
+      className={`w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 ${focusRingColor} focus:border-primary text-sm`}
     />
   </div>
 );
@@ -129,7 +129,7 @@ const CheckboxField = ({
   checked,
   onChange,
   label,
-  focusRingColor = "focus:ring-[#234e3f]",
+  focusRingColor = "focus:ring-primary",
 }) => (
   <div className="flex items-center mt-2">
     <input
@@ -138,7 +138,7 @@ const CheckboxField = ({
       name={name}
       checked={!!checked}
       onChange={onChange}
-      className={`h-4 w-4 rounded text-[#234e3f] focus:ring-1 ${focusRingColor}`}
+      className={`h-4 w-4 rounded text-primary focus:ring-1 ${focusRingColor}`}
     />
     <label
       htmlFor={id}
@@ -736,14 +736,14 @@ const TutorProfileEditView = ({
   howDidYouKnowOptions,
 }) => {
   // Theme colors
-  const primaryColorClass = "bg-[#234e3f]";
-  const hoverColorClass = "hover:bg-[#173b2e]";
-  const focusRingColorClass = "focus:ring-[#234e3f]";
-  const sectionHeaderColorClass = "bg-[#234e3f]";
+  const primaryColorClass = "bg-primary";
+  const hoverColorClass = "hover:bg-primary-hover";
+  const focusRingColorClass = "focus:ring-primary";
+  const sectionHeaderColorClass = "bg-primary";
 
   // Profile image fallback
   const profileImageFallback =
-    "https://placehold.co/200x200/6344cc/FFF?text=" +
+    "https://placehold.co/200x200/1769F5/FFF?text=" +
     (formData.name
       ? formData.name
           .split(" ")

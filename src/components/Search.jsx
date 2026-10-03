@@ -73,7 +73,7 @@ const Search = ({
 
   return (
     <div
-      className={`w-[38.75rem] h-[3.063rem] rounded-Radius-200 [background:linear-gradient(#e8f1fd,_#e8f1fd),_#fff] border-[#1368a4] border-solid border-Stroke-Border box-border overflow-hidden shrink-0 flex flex-row items-center justify-start py-[0.75rem] px-[1rem] gap-[0.5rem] z-[1] text-left text-[1rem] text-[#1e1e1e] font-roboto ${className}`}
+      className={`w-[38.75rem] h-[3.063rem] rounded-Radius-200 [background:linear-gradient(var(--primary-soft),_var(--primary-soft)),_var(--surface)] border-primary border-solid border-Stroke-Border box-border overflow-hidden shrink-0 flex flex-row items-center justify-start py-[0.75rem] px-[1rem] gap-[0.5rem] z-[1] text-left text-[1rem] text-[var(--text-primary)] font-roboto ${className}`}
       data-state={state}
       data-valueType={valueType}
       style={searchStyle}

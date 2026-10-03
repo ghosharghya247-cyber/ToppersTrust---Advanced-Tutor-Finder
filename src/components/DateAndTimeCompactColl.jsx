@@ -9,10 +9,10 @@ const DateAndTimeCompactColl = ({
 }) => {
   return (
     <div
-      className={`w-[7.938rem] rounded-md flex flex-row items-center justify-end gap-[0.375rem] text-center text-[1.063rem] text-[#007aff] font-Body-Regular ${className}`}
+      className={`w-[7.938rem] rounded-md flex flex-row items-center justify-end gap-[0.375rem] text-center text-[1.063rem] text-primary font-Body-Regular ${className}`}
       data-type={type}
     >
-      <div className="rounded-md bg-[rgba(120,120,128,0.12)] flex flex-row items-center justify-center py-[0.375rem] px-[0.687rem] gap-[0.312rem]">
+      <div className="rounded-md bg-[var(--surface-muted)] flex flex-row items-center justify-center py-[0.375rem] px-[0.687rem] gap-[0.312rem]">
         <div className="relative tracking-[-0.43px] leading-[1.375rem]">
           {month}
         </div>
@@ -20,7 +20,7 @@ const DateAndTimeCompactColl = ({
           {year}
         </div>
       </div>
-      <div className="w-[5.375rem] rounded-md bg-[rgba(120,120,128,0.12)] h-[2.125rem] hidden flex-row items-start justify-start py-[0.375rem] px-[0.687rem] box-border">
+      <div className="w-[5.375rem] rounded-md bg-[var(--surface-muted)] h-[2.125rem] hidden flex-row items-start justify-start py-[0.375rem] px-[0.687rem] box-border">
         <div className="relative tracking-[-0.43px] leading-[1.375rem] hidden">
           {time}
         </div>

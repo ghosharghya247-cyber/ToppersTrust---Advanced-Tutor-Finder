@@ -176,11 +176,11 @@ const GuardianProfileEditController = () => {
 
   // Generate fallback image for preview
   const profileImageFallback = formData.name
-    ? `https://placehold.co/200x200/6344cc/FFF?text=${formData.name
+    ? `https://placehold.co/200x200/1769F5/FFF?text=${formData.name
         .split(" ")
         .map((n) => n[0])
         .join("")}`
-    : "https://placehold.co/200x200/6344cc/FFF?text=G";
+    : "https://placehold.co/200x200/1769F5/FFF?text=G";
 
   // Loading state
   if (loading) return <LoadingState label="Opening your profile editor…" />;
@@ -260,7 +260,7 @@ const GuardianProfileEditController = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#234e3f]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -296,7 +296,7 @@ const GuardianProfileEditController = () => {
                   value={formData.contactNumber}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#234e3f]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="Enter contact number"
                 />
               </div>
@@ -314,7 +314,7 @@ const GuardianProfileEditController = () => {
                   value={formData.gender}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#234e3f]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 >
                   {genderOptions.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -338,7 +338,7 @@ const GuardianProfileEditController = () => {
                   value={formData.city}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#234e3f]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="Enter your city"
                 />
               </div>
@@ -357,7 +357,7 @@ const GuardianProfileEditController = () => {
                   value={formData.relationWithStudent}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#234e3f]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="e.g., Father, Mother, etc."
                 />
               </div>
@@ -376,7 +376,7 @@ const GuardianProfileEditController = () => {
                   onChange={handleInputChange}
                   required
                   rows="3"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#234e3f]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="Enter your full address"
                 />
               </div>
@@ -394,7 +394,7 @@ const GuardianProfileEditController = () => {
                   name="facebookProfile"
                   value={formData.facebookProfile}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#234e3f]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="https://facebook.com/yourprofile"
                 />
               </div>
@@ -412,7 +412,7 @@ const GuardianProfileEditController = () => {
                   name="driveLink"
                   value={formData.driveLink}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#234e3f]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="https://drive.google.com/..."
                 />
               </div>
@@ -430,7 +430,7 @@ const GuardianProfileEditController = () => {
                   value={formData.howDidYouKnow}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#234e3f]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 >
                   {howDidYouKnowOptions.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -455,7 +455,7 @@ const GuardianProfileEditController = () => {
             <button
               type="submit"
               disabled={saving}
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-[#234e3f] text-white rounded-lg hover:bg-[#173b2e] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {saving ? (
                 <>

@@ -139,8 +139,8 @@ const AdminPortal = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-black flex items-center justify-center font-mono">
-                <div className="text-green-500 animate-pulse tracking-[0.3em]">
+            <div className="min-h-screen bg-background flex items-center justify-center font-mono">
+                <div className="text-primary animate-pulse tracking-[0.3em]">
                     {">"} SYNCHRONIZING_ALL_SYSTEM_NODES...
                 </div>
             </div>

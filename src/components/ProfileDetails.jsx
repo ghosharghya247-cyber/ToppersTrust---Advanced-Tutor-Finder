@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const ProfileDetails = ({ className = "" }) => {
   return (
     <div
-      className={`self-stretch h-[41.375rem] rounded-11xl bg-[rgba(179,179,179,0.15)] border-[#1368a4] border-solid border-[1px] box-border overflow-hidden shrink-0 flex flex-col items-start justify-start pt-[3.187rem] pb-[5.062rem] pl-[1.5rem] pr-[1.25rem] max-w-full z-[2] text-left text-[0.938rem] font-roboto ${className}`}
+      className={`self-stretch h-[41.375rem] rounded-11xl bg-[var(--surface-muted)] border-primary border-solid border-[1px] box-border overflow-hidden shrink-0 flex flex-col items-start justify-start pt-[3.187rem] pb-[5.062rem] pl-[1.5rem] pr-[1.25rem] max-w-full z-[2] text-left text-[0.938rem] font-roboto ${className}`}
     >
       <div className="mt-[-161.907rem] self-stretch flex flex-row items-start justify-start pt-[0rem] pb-[160.093rem] pl-[206.687rem] pr-[0rem]">
         <img
@@ -23,7 +23,7 @@ const ProfileDetails = ({ className = "" }) => {
         />
       </div>
       <div className="self-stretch flex flex-row items-start justify-end pt-[0rem] px-[2.687rem] pb-[2.375rem]">
-        <div className="w-[19.875rem] relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(#1368a4,_#1368a4),_#000] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] inline-block shrink-0">
+        <div className="w-[19.875rem] relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(var(--primary),_var(--primary)),_var(--text-primary)] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] inline-block shrink-0">
           Guardian/Student ID : 22014
         </div>
       </div>
@@ -35,9 +35,9 @@ const ProfileDetails = ({ className = "" }) => {
               alt=""
             />
           </div>
-          <div className="self-stretch flex-1 rounded-mini [background:linear-gradient(#e8f1fd,_#e8f1fd),_#d9d9d9] border-[#e8f1fd] border-solid border-[1px] box-border flex flex-row items-start justify-between pt-[0.687rem] pb-[0.625rem] pl-[12.875rem] pr-[3.062rem] gap-[1.25rem] max-w-full z-[1]">
-            <div className="h-[2.75rem] w-[34.563rem] relative rounded-mini [background:linear-gradient(#e8f1fd,_#e8f1fd),_#d9d9d9] border-[#e8f1fd] border-solid border-[1px] box-border hidden max-w-full" />
-            <div className="w-[12.125rem] relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(#1368a4,_#1368a4),_#000] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] inline-block shrink-0 z-[2]">
+          <div className="self-stretch flex-1 rounded-mini [background:linear-gradient(var(--primary-soft),_var(--primary-soft)),_var(--border)] border-[var(--primary-soft)] border-solid border-[1px] box-border flex flex-row items-start justify-between pt-[0.687rem] pb-[0.625rem] pl-[12.875rem] pr-[3.062rem] gap-[1.25rem] max-w-full z-[1]">
+            <div className="h-[2.75rem] w-[34.563rem] relative rounded-mini [background:linear-gradient(var(--primary-soft),_var(--primary-soft)),_var(--border)] border-[var(--primary-soft)] border-solid border-[1px] box-border hidden max-w-full" />
+            <div className="w-[12.125rem] relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(var(--primary),_var(--primary)),_var(--text-primary)] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] inline-block shrink-0 z-[2]">
               Profile Completed: 20%
             </div>
             <div className="h-[1.125rem] flex flex-col items-start justify-start pt-[0.812rem] px-[0rem] pb-[0rem] box-border">
@@ -66,7 +66,7 @@ const ProfileDetails = ({ className = "" }) => {
             />
           </div>
           <div className="flex-1 flex flex-col items-start justify-start pt-[0.125rem] px-[0rem] pb-[0rem]">
-            <div className="self-stretch relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(#1368a4,_#1368a4),_#000] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
+            <div className="self-stretch relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(var(--primary),_var(--primary)),_var(--text-primary)] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
               Email
             </div>
           </div>
@@ -81,7 +81,7 @@ const ProfileDetails = ({ className = "" }) => {
           searchWidth="17.875rem"
           searchHeight="1.938rem"
           searchBorderRadius="9999px"
-          searchBorder="1px solid #d9d9d9"
+          searchBorder="1px solid var(--border)"
           searchPosition="unset"
           searchTop="unset"
           searchLeft="unset"
@@ -91,7 +91,7 @@ const ProfileDetails = ({ className = "" }) => {
           valueOutline="unset"
           valueFontWeight="600"
           valueBackgroundColor="unset"
-          valueBackground="linear-gradient(#1368a4, #1368a4), #1e1e1e"
+          valueBackground="linear-gradient(var(--primary), var(--primary)), var(--text-primary)"
           valueWebkitBackgroundClip="unset"
           valueWebkitTextFillColor="unset"
           valueDisplay="unset"
@@ -126,7 +126,7 @@ const ProfileDetails = ({ className = "" }) => {
             />
           </div>
           <div className="flex-1 flex flex-col items-start justify-start pt-[0.125rem] px-[0rem] pb-[0rem]">
-            <div className="self-stretch relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(#1368a4,_#1368a4),_#000] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] z-[1]">
+            <div className="self-stretch relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(var(--primary),_var(--primary)),_var(--text-primary)] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] z-[1]">
               Contact Number
             </div>
           </div>
@@ -140,7 +140,7 @@ const ProfileDetails = ({ className = "" }) => {
           searchWidth="17.875rem"
           searchHeight="1.938rem"
           searchBorderRadius="9999px"
-          searchBorder="1px solid #d9d9d9"
+          searchBorder="1px solid var(--border)"
           searchPosition="unset"
           searchTop="unset"
           searchLeft="unset"
@@ -150,7 +150,7 @@ const ProfileDetails = ({ className = "" }) => {
           valueOutline="unset"
           valueFontWeight="600"
           valueBackgroundColor="unset"
-          valueBackground="linear-gradient(#1368a4, #1368a4), #1e1e1e"
+          valueBackground="linear-gradient(var(--primary), var(--primary)), var(--text-primary)"
           valueWebkitBackgroundClip="unset"
           valueWebkitTextFillColor="unset"
           valueDisplay="unset"
@@ -172,7 +172,7 @@ const ProfileDetails = ({ className = "" }) => {
             />
           </div>
           <div className="flex-1 flex flex-col items-start justify-start pt-[0.187rem] px-[0rem] pb-[0rem] ml-[-0.313rem] relative">
-            <div className="self-stretch relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(#1368a4,_#1368a4),_#000] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] whitespace-pre-wrap shrink-0">
+            <div className="self-stretch relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(var(--primary),_var(--primary)),_var(--text-primary)] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] whitespace-pre-wrap shrink-0">
               {" "}
               Address
             </div>
@@ -187,7 +187,7 @@ const ProfileDetails = ({ className = "" }) => {
           searchWidth="17.875rem"
           searchHeight="1.938rem"
           searchBorderRadius="9999px"
-          searchBorder="1px solid #d9d9d9"
+          searchBorder="1px solid var(--border)"
           searchPosition="unset"
           searchTop="unset"
           searchLeft="unset"
@@ -197,7 +197,7 @@ const ProfileDetails = ({ className = "" }) => {
           valueOutline="unset"
           valueFontWeight="600"
           valueBackgroundColor="unset"
-          valueBackground="linear-gradient(#1368a4, #1368a4), #1e1e1e"
+          valueBackground="linear-gradient(var(--primary), var(--primary)), var(--text-primary)"
           valueWebkitBackgroundClip="unset"
           valueWebkitTextFillColor="unset"
           valueDisplay="unset"

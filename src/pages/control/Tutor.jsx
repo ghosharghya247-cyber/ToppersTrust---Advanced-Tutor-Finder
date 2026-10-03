@@ -1,230 +1,304 @@
-
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import TutorView from '../view/TutorView';
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import TutorView from "../view/TutorView";
 import {
-  getAuthUser,
-  fetchTutorProfileByUserId,
-  getPublicUrlForPhoto,
-  fetchAcceptedJobsNotifications,
-  signOut,
-  computeDisplayName,
-  initiateSSLCommerzPayment,
-} from '../model/TutorModel';
+  getAuthUser,
+  fetchTutorProfileByUserId,
+  getPublicUrlForPhoto,
+  fetchAcceptedJobsNotifications,
+  signOut,
+  computeDisplayName,
+  initiateSSLCommerzPayment,
+} from "../model/TutorModel";
 
-const initialTutorState = { name: 'Loading...', tutorId: null, profileImageUrl: '' };
+const initialTutorState = {
+  name: "Loading...",
+  tutorId: null,
+  profileImageUrl: "",
+};
 export default function TutorController() {
-    const navigate = useNavigate();
-    const [tutorData, setTutorData] = useState(initialTutorState);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [tutorData, setTutorData] = useState(initialTutorState);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    const [notifications, setNotifications] = useState([]);
-    const [unreadCount, setUnreadCount] = useState(0);
-    const [showNotificationsPanel, setShowNotificationsPanel] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [showNotificationsPanel, setShowNotificationsPanel] = useState(false);
 
-    // --- New Payment States ---
-    const [paymentLoading, setPaymentLoading] = useState(false);
-    const [paymentMessage, setPaymentMessage] = useState('');
-    // --- End New Payment States ---
+  // --- New Payment States ---
+  const [paymentLoading, setPaymentLoading] = useState(false);
+  const [paymentMessage, setPaymentMessage] = useState("");
+  // --- End New Payment States ---
 
-    const notificationPanelRef = useRef(null);
+  const notificationPanelRef = useRef(null);
 
-    useEffect(() => {
-        let mounted = true;
-        async function fetchData() {
-            setLoading(true);
-            setError(null);
-            setTutorData(initialTutorState);
+  useEffect(() => {
+    const paymentStatus = new URLSearchParams(location.search).get("payment");
+    if (!paymentStatus) return;
 
-            try {
-                const { user, error: authError } = await getAuthUser();
-                if (authError || !user) {
-                    if (mounted) {
-                        setError('Authentication error. Please log in again.');
-                        navigate('/');
-                        setLoading(false);
-                    }
-                    return;
-                }
+    const messages = {
+      success: "Payment completed successfully.",
+      failed: "Payment was not completed. Please try again.",
+      cancelled: "Payment was cancelled. No charge was made.",
+      error:
+        "We could not verify the payment. Please contact support if you were charged.",
+    };
+    setPaymentMessage(messages[paymentStatus] || "Payment status received.");
+    navigate("/tutor-dashboard", { replace: true });
+  }, [location.search, navigate]);
 
-                const { profile, error: profileError } = await fetchTutorProfileByUserId(user);
-                if (profileError) {
-                    if (profileError?.code === 'PGRST116') {
-                        if (mounted) setError('Tutor profile not found. Please complete your profile.');
-                        setTutorData(prev => ({ ...prev, name: user.email?.split('@')[0] || 'User', tutorId: null }));
-                    } else {
-                        throw profileError;
-                    }
-                } else if (profile) {
-                    const imageUrl = getPublicUrlForPhoto(profile.photo);
-                    const displayName = computeDisplayName(user.email, profile.name);
+  useEffect(() => {
+    let mounted = true;
+    async function fetchData() {
+      setLoading(true);
+      setError(null);
+      setTutorData(initialTutorState);
 
-                    if (mounted) setTutorData({ name: displayName, tutorId: profile.id, profileImageUrl: imageUrl });
-                } else {
-                    if (mounted) {
-                        setError('Tutor profile data is missing.');
-                        setTutorData(prev => ({ ...prev, name: user.email?.split('@')[0] || 'User', tutorId: null }));
-                    }
-                }
-            } catch (e) {
-                console.error('fetchData: General error:', e);
-                if (mounted) {
-                    setError(`Failed to load dashboard data: ${e.message}`);
-                    setTutorData(prev => ({ ...prev, name: 'Error Loading', tutorId: null }));
-                }
-            } finally {
-                if (mounted) setLoading(false);
-            }
+      try {
+        const { user, error: authError } = await getAuthUser();
+        if (authError || !user) {
+          if (mounted) {
+            setError("Authentication error. Please log in again.");
+            navigate("/");
+            setLoading(false);
+          }
+          return;
         }
 
-        fetchData();
-        return () => { mounted = false; };
-    }, [navigate]);
+        const { profile, error: profileError } =
+          await fetchTutorProfileByUserId(user);
+        if (profileError) {
+          if (profileError?.code === "PGRST116") {
+            if (mounted)
+              setError(
+                "Tutor profile not found. Please complete your profile.",
+              );
+            setTutorData((prev) => ({
+              ...prev,
+              name: user.email?.split("@")[0] || "User",
+              tutorId: null,
+            }));
+          } else {
+            throw profileError;
+          }
+        } else if (profile) {
+          const imageUrl = getPublicUrlForPhoto(profile.photo);
+          const displayName = computeDisplayName(user.email, profile.name);
 
-    useEffect(() => {
-        let mounted = true;
-        if (!tutorData.tutorId) {
-            if (tutorData.name !== 'Loading...') setLoading(false);
-            return;
+          if (mounted)
+            setTutorData({
+              name: displayName,
+              tutorId: profile.id,
+              profileImageUrl: imageUrl,
+            });
+        } else {
+          if (mounted) {
+            setError("Tutor profile data is missing.");
+            setTutorData((prev) => ({
+              ...prev,
+              name: user.email?.split("@")[0] || "User",
+              tutorId: null,
+            }));
+          }
         }
-
-        async function loadNotifications() {
-            if (!loading) setLoading(true);
-            try {
-                const { notifications: fetchedNotifications, error: notifError } = await fetchAcceptedJobsNotifications(tutorData.tutorId);
-                if (notifError) throw notifError;
-
-                // merge read state from localStorage
-                const seenNotificationIds = JSON.parse(localStorage.getItem(`seenTutorNotifications_${tutorData.tutorId}`)) || [];
-                const merged = (fetchedNotifications || []).map(n => ({ ...n, isRead: seenNotificationIds.includes(n.id) }));
-
-                if (mounted) {
-                    setNotifications(merged);
-                    setUnreadCount(merged.filter(n => !n.isRead).length);
-                }
-            } catch (e) {
-                console.error('fetchNotifications: Exception:', e);
-                if (mounted) {
-                    setError(prev => prev || 'Failed to process notifications.');
-                    setNotifications([]);
-                    setUnreadCount(0);
-                }
-            } finally {
-                if (mounted) setLoading(false);
-            }
+      } catch (e) {
+        console.error("fetchData: General error:", e);
+        if (mounted) {
+          setError(`Failed to load dashboard data: ${e.message}`);
+          setTutorData((prev) => ({
+            ...prev,
+            name: "Error Loading",
+            tutorId: null,
+          }));
         }
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    }
 
-        loadNotifications();
-        return () => { mounted = false; };
-    }, [tutorData.tutorId]);
+    fetchData();
+    return () => {
+      mounted = false;
+    };
+  }, [navigate]);
 
-    // click outside to close notification panel
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            const bellButton = document.getElementById('notification-bell-button');
-            if (notificationPanelRef.current &&
-                !notificationPanelRef.current.contains(event.target) &&
-                !(bellButton && bellButton.contains(event.target))) {
-                setShowNotificationsPanel(false);
-            }
-        };
+  useEffect(() => {
+    let mounted = true;
+    if (!tutorData.tutorId) {
+      if (tutorData.name !== "Loading...") setLoading(false);
+      return;
+    }
 
-        if (showNotificationsPanel) document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, [showNotificationsPanel]);
+    async function loadNotifications() {
+      if (!loading) setLoading(true);
+      try {
+        const { notifications: fetchedNotifications, error: notifError } =
+          await fetchAcceptedJobsNotifications(tutorData.tutorId);
+        if (notifError) throw notifError;
 
-    const handleNotificationBellClick = useCallback(() => {
-        setShowNotificationsPanel(prev => !prev);
+        // merge read state from localStorage
+        const seenNotificationIds =
+          JSON.parse(
+            localStorage.getItem(`seenTutorNotifications_${tutorData.tutorId}`),
+          ) || [];
+        const merged = (fetchedNotifications || []).map((n) => ({
+          ...n,
+          isRead: seenNotificationIds.includes(n.id),
+        }));
 
-        // mark as read when opening
-        if (!showNotificationsPanel && unreadCount > 0 && tutorData.tutorId) {
-            const idsToMark = notifications.filter(n => !n.isRead).map(n => n.id);
-            if (idsToMark.length > 0) {
-                const currentSeen = JSON.parse(localStorage.getItem(`seenTutorNotifications_${tutorData.tutorId}`)) || [];
-                const updatedSeen = [...new Set([...currentSeen, ...idsToMark])];
-                localStorage.setItem(`seenTutorNotifications_${tutorData.tutorId}`, JSON.stringify(updatedSeen));
-                setNotifications(prev => prev.map(n => idsToMark.includes(n.id) ? { ...n, isRead: true } : n));
-            }
-            setUnreadCount(0);
+        if (mounted) {
+          setNotifications(merged);
+          setUnreadCount(merged.filter((n) => !n.isRead).length);
         }
-    }, [notifications, showNotificationsPanel, unreadCount, tutorData.tutorId]);
-
-    // --- New Payment Handler ---
-    const handleAdvertiseClick = async () => {
-        if (!tutorData.tutorId) {
-            setPaymentMessage('Cannot proceed: Tutor ID missing.');
-            return;
+      } catch (e) {
+        console.error("fetchNotifications: Exception:", e);
+        if (mounted) {
+          setError((prev) => prev || "Failed to process notifications.");
+          setNotifications([]);
+          setUnreadCount(0);
         }
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    }
 
-        setPaymentLoading(true);
-        setPaymentMessage('Processing payment request...');
-        setError(null);
+    loadNotifications();
+    return () => {
+      mounted = false;
+    };
+  }, [tutorData.tutorId]);
 
-        try {
-            const result = await initiateSSLCommerzPayment(tutorData.tutorId, tutorData.name);
-
-            if (result.success) {
-                if (result.redirectUrl) {
-                    // Real SSLCommerz redirect (when backend is implemented)
-                    setPaymentMessage('Redirecting to payment gateway...');
-                    window.location.href = result.redirectUrl;
-                } else {
-                    // Mock mode - no actual payment processed
-                    setPaymentMessage(result.message || 'Payment completed successfully!');
-                    console.log('Transaction ID:', result.transactionId);
-                }
-            } else {
-                setPaymentMessage(result.message || 'Payment initiation failed.');
-            }
-        } catch (e) {
-            console.error('Payment error:', e);
-            setPaymentMessage('An unexpected error occurred. Please try again.');
-        } finally {
-            setPaymentLoading(false);
-        }
+  // click outside to close notification panel
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const bellButton = document.getElementById("notification-bell-button");
+      if (
+        notificationPanelRef.current &&
+        !notificationPanelRef.current.contains(event.target) &&
+        !(bellButton && bellButton.contains(event.target))
+      ) {
+        setShowNotificationsPanel(false);
+      }
     };
 
+    if (showNotificationsPanel)
+      document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showNotificationsPanel]);
 
-    const handleSignOut = async () => {
-        setError(null);
-        try {
-            const signOutError = await signOut();
-            if (signOutError) throw signOutError;
-            navigate('/');
-        } catch (e) {
-            console.error('Sign out error:', e);
-            setError('Failed to sign out. Please try again.');
+  const handleNotificationBellClick = useCallback(() => {
+    setShowNotificationsPanel((prev) => !prev);
+
+    // mark as read when opening
+    if (!showNotificationsPanel && unreadCount > 0 && tutorData.tutorId) {
+      const idsToMark = notifications.filter((n) => !n.isRead).map((n) => n.id);
+      if (idsToMark.length > 0) {
+        const currentSeen =
+          JSON.parse(
+            localStorage.getItem(`seenTutorNotifications_${tutorData.tutorId}`),
+          ) || [];
+        const updatedSeen = [...new Set([...currentSeen, ...idsToMark])];
+        localStorage.setItem(
+          `seenTutorNotifications_${tutorData.tutorId}`,
+          JSON.stringify(updatedSeen),
+        );
+        setNotifications((prev) =>
+          prev.map((n) =>
+            idsToMark.includes(n.id) ? { ...n, isRead: true } : n,
+          ),
+        );
+      }
+      setUnreadCount(0);
+    }
+  }, [notifications, showNotificationsPanel, unreadCount, tutorData.tutorId]);
+
+  // --- New Payment Handler ---
+  const handleAdvertiseClick = async () => {
+    if (!tutorData.tutorId) {
+      setPaymentMessage("Cannot proceed: Tutor ID missing.");
+      return;
+    }
+
+    setPaymentLoading(true);
+    setPaymentMessage("Processing payment request...");
+    setError(null);
+
+    try {
+      const result = await initiateSSLCommerzPayment(
+        tutorData.tutorId,
+        tutorData.name,
+      );
+
+      if (result.success) {
+        if (result.redirectUrl) {
+          // Real SSLCommerz redirect (when backend is implemented)
+          setPaymentMessage("Redirecting to payment gateway...");
+          window.location.href = result.redirectUrl;
+        } else {
+          // Mock mode - no actual payment processed
+          setPaymentMessage(
+            result.message || "Payment completed successfully!",
+          );
+          console.log("Transaction ID:", result.transactionId);
         }
-    };
+      } else {
+        setPaymentMessage(result.message || "Payment initiation failed.");
+      }
+    } catch (e) {
+      console.error("Payment error:", e);
+      setPaymentMessage("An unexpected error occurred. Please try again.");
+    } finally {
+      setPaymentLoading(false);
+    }
+  };
 
-    const getFontSizeClass = (name) => {
-        const length = name?.length || 0;
-        if (length < 9) return 'text-3xl sm:text-4xl md:text-5xl';
-        if (length < 12) return 'text-2xl sm:text-3xl md:text-4xl';
-        return 'text-xl sm:text-2xl md:text-3xl';
-    };
+  const handleSignOut = async () => {
+    setError(null);
+    try {
+      const signOutError = await signOut();
+      if (signOutError) throw signOutError;
+      navigate("/");
+    } catch (e) {
+      console.error("Sign out error:", e);
+      setError("Failed to sign out. Please try again.");
+    }
+  };
 
-    const profileImageFallback = 'https://placehold.co/150x200/6344cc/FFF?text=' +
-        (tutorData.name && tutorData.name !== 'Loading...' ? tutorData.name.split(' ').map(n => n[0]).join('') : 'T');
+  const getFontSizeClass = (name) => {
+    const length = name?.length || 0;
+    if (length < 9) return "text-3xl sm:text-4xl md:text-5xl";
+    if (length < 12) return "text-2xl sm:text-3xl md:text-4xl";
+    return "text-xl sm:text-2xl md:text-3xl";
+  };
 
-    return (
-        <TutorView
-            tutorData={tutorData}
-            loading={loading}
-            error={error}
-            notifications={notifications}
-            unreadCount={unreadCount}
-            showNotificationsPanel={showNotificationsPanel}
-            notificationPanelRef={notificationPanelRef}
-            onNotificationBellClick={handleNotificationBellClick}
-            onSignOut={handleSignOut}
-            getFontSizeClass={getFontSizeClass}
-            profileImageFallback={profileImageFallback}
-            // --- Passed new props ---
-            paymentLoading={paymentLoading}
-            paymentMessage={paymentMessage}
-            onAdvertiseClick={handleAdvertiseClick}
-        />
-    );
+  const profileImageFallback =
+    "https://placehold.co/150x200/1769F5/FFF?text=" +
+    (tutorData.name && tutorData.name !== "Loading..."
+      ? tutorData.name
+          .split(" ")
+          .map((n) => n[0])
+          .join("")
+      : "T");
+
+  return (
+    <TutorView
+      tutorData={tutorData}
+      loading={loading}
+      error={error}
+      notifications={notifications}
+      unreadCount={unreadCount}
+      showNotificationsPanel={showNotificationsPanel}
+      notificationPanelRef={notificationPanelRef}
+      onNotificationBellClick={handleNotificationBellClick}
+      onSignOut={handleSignOut}
+      getFontSizeClass={getFontSizeClass}
+      profileImageFallback={profileImageFallback}
+      // --- Passed new props ---
+      paymentLoading={paymentLoading}
+      paymentMessage={paymentMessage}
+      onAdvertiseClick={handleAdvertiseClick}
+    />
+  );
 }

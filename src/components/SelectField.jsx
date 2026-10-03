@@ -32,7 +32,7 @@ const SelectField = ({
 
   return (
     <div
-      className={`h-[4.875rem] w-[23rem] flex flex-col items-start justify-start relative gap-[0.5rem] text-left text-[1rem] text-[#1e1e1e] font-roboto data-[state='Default']:data-[valueType='Placeholder']:[&_.select1]:text-[#b3b3b3] ${className}`}
+      className={`h-[4.875rem] w-[23rem] flex flex-col items-start justify-start relative gap-[0.5rem] text-left text-[1rem] text-[var(--text-primary)] font-roboto data-[state='Default']:data-[valueType='Placeholder']:[&_.select1]:text-[var(--text-muted)] ${className}`}
       data-state={state}
       data-valueType={valueType}
       style={tuitionTypeStyle}
@@ -43,12 +43,12 @@ const SelectField = ({
         </div>
       )}
       {!!hasDescription && (
-        <div className="w-[15rem] relative leading-[140%] text-[#757575] z-[1]">
+        <div className="w-[15rem] relative leading-[140%] text-[var(--text-secondary)] z-[1]">
           {description}
         </div>
       )}
       <FormControl
-        className="select1 self-stretch h-[2.563rem] font-roboto text-[1rem] text-[#1e1e1e] min-w-[15rem] z-[2]"
+        className="select1 self-stretch h-[2.563rem] font-roboto text-[1rem] text-[var(--text-primary)] min-w-[15rem] z-[2]"
         variant="standard"
         sx={{
           borderRadius: "0px 0px 0px 0px",
@@ -90,7 +90,7 @@ const SelectField = ({
         <Select color="primary" disableUnderline displayEmpty />
         <FormHelperText />
       </FormControl>
-      <div className="!!m-[0 important] absolute top-[0.5rem] left-[0.5rem] shadow-[0px_1px_4px_rgba(12,_12,_13,_0.1),_0px_1px_4px_rgba(12,_12,_13,_0.05)] rounded-Radius-200 bg-[#fff] border-[#d9d9d9] border-solid border-[1px] hidden flex-col items-start justify-start p-[0.5rem] gap-[0.5rem] z-[3]">
+      <div className="!!m-[0 important] absolute top-[0.5rem] left-[0.5rem] shadow-[0px_1px_4px_rgba(12,_12,_13,_0.1),_0px_1px_4px_rgba(12,_12,_13,_0.05)] rounded-Radius-200 bg-[var(--surface)] border-[var(--border)] border-solid border-[1px] hidden flex-col items-start justify-start p-[0.5rem] gap-[0.5rem] z-[3]">
         <div className="relative leading-[140%] font-semibold">{value1}</div>
         <div className="relative leading-[140%]">Option 2</div>
         <div className="relative leading-[140%]">Option 3</div>

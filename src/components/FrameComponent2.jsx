@@ -140,11 +140,11 @@ const FrameComponent2 = ({
 
   return (
     <div
-      className={`self-stretch flex flex-row items-start justify-start py-[0rem] pl-[1.062rem] pr-[0rem] box-border max-w-full text-left text-[1.438rem] text-[#55848c] font-M3-display-large ${className}`}
+      className={`self-stretch flex flex-row items-start justify-start py-[0rem] pl-[1.062rem] pr-[0rem] box-border max-w-full text-left text-[1.438rem] text-primary font-M3-display-large ${className}`}
       style={frameDiv1Style}
     >
       <div className="flex-1 flex flex-row items-start justify-start relative max-w-full">
-        <div className="h-[14.438rem] w-[92.375rem] absolute !!m-[0 important] right-[-9.875rem] bottom-[0.688rem] [background:linear-gradient(#55848c,_#55848c),_linear-gradient(#ccdadd,_#ccdadd),_rgba(217,_217,_217,_0.3)] border-[#3a394d] border-solid border-[1px] box-border" />
+        <div className="h-[14.438rem] w-[92.375rem] absolute !!m-[0 important] right-[-9.875rem] bottom-[0.688rem] [background:linear-gradient(var(--primary),_var(--primary)),_linear-gradient(var(--border),_var(--border)),_rgba(217,_217,_217,_0.3)] border-[var(--text-primary)] border-solid border-[1px] box-border" />
         <img
           className="h-[14.563rem] w-[91.438rem] absolute !!m-[0 important] top-[2.375rem] right-[-9.875rem]"
           loading="lazy"
@@ -152,11 +152,11 @@ const FrameComponent2 = ({
           src={rectangle53}
         />
         <div className="h-[32.625rem] flex-1 relative font-extrabold inline-block [filter:drop-shadow(0px_4px_6px_rgba(0,_0,_0,_0.25))] z-[1] mq450:text-[1.125rem]">
-          <p className="m-0 text-[1.688rem] text-[#3a394d]">&nbsp;</p>
-          <p className="m-0 text-[1.563rem] text-[#3a394d]">
+          <p className="m-0 text-[1.688rem] text-[var(--text-primary)]">&nbsp;</p>
+          <p className="m-0 text-[1.563rem] text-[var(--text-primary)]">
             <span className="whitespace-pre-wrap" style={spanStyle}>
-              <span className="text-[#55848c] whitespace-pre-wrap">{`  `}</span>
-              <span className="text-[#55848c]">{` `}</span>
+              <span className="text-primary whitespace-pre-wrap">{`  `}</span>
+              <span className="text-primary">{` `}</span>
             </span>
             <span>
               <span className="whitespace-pre-wrap">{`                                                                                                                                   `}</span>
@@ -183,23 +183,23 @@ const FrameComponent2 = ({
               <span className="whitespace-pre-wrap">{`Institute                    : `}</span>
             </span>
             <span className="whitespace-pre-wrap" style={bRACUniversityStyle}>
-              <span className="text-[#55848c]"> BRAC University</span>
+              <span className="text-primary"> BRAC University</span>
             </span>
             <span className="text-[1.563rem]">
-              <span className="text-[#3a394d] whitespace-pre-wrap">{`                                                                    Curriculum          :   `}</span>
-              <span className="text-[#55848c] whitespace-pre-wrap">{`English Version  `}</span>
+              <span className="text-[var(--text-primary)] whitespace-pre-wrap">{`                                                                    Curriculum          :   `}</span>
+              <span className="text-primary whitespace-pre-wrap">{`English Version  `}</span>
               <span
                 className="whitespace-pre-wrap"
                 style={span2Style}
               >{`                                                                                                                             `}</span>
             </span>
           </p>
-          <p className="m-0 text-[#3a394d]">
+          <p className="m-0 text-[var(--text-primary)]">
             <span className="whitespace-pre-wrap">
               <span className="whitespace-pre-wrap">{`Exam/Degree Title  : `}</span>
-              <span className="text-[#55848c] whitespace-pre-wrap">{` B.Sc                                                                                              `}</span>
-              <span className="text-[#3a394d] whitespace-pre-wrap">{`  From Date              : `}</span>
-              <span className="text-[#55848c] whitespace-pre-wrap">
+              <span className="text-primary whitespace-pre-wrap">{` B.Sc                                                                                              `}</span>
+              <span className="text-[var(--text-primary)] whitespace-pre-wrap">{`  From Date              : `}</span>
+              <span className="text-primary whitespace-pre-wrap">
                 {" "}
                 2022-09-10
               </span>
@@ -207,10 +207,10 @@ const FrameComponent2 = ({
           </p>
           <p className="m-0">
             <span className="whitespace-pre-wrap" style={majorGroupCSEStyle}>
-              <span className="text-[#3a394d] whitespace-pre-wrap">{`Major/Group            :  `}</span>
+              <span className="text-[var(--text-primary)] whitespace-pre-wrap">{`Major/Group            :  `}</span>
               <span className="whitespace-pre-wrap">{`CSE                                                                                                 `}</span>
-              <span className="text-[#3a394d] whitespace-pre-wrap">{`To Date                   :  `}</span>
-              <span className="text-[#55848c] whitespace-pre-wrap">
+              <span className="text-[var(--text-primary)] whitespace-pre-wrap">{`To Date                   :  `}</span>
+              <span className="text-primary whitespace-pre-wrap">
                 {" "}
                 2026-12-31
               </span>
@@ -218,23 +218,23 @@ const FrameComponent2 = ({
           </p>
           <p className="m-0">
             <span className="whitespace-pre-wrap" style={iDCardNo2Style}>
-              <span className="text-[#3a394d] whitespace-pre-wrap">{`ID Card No                : `}</span>
+              <span className="text-[var(--text-primary)] whitespace-pre-wrap">{`ID Card No                : `}</span>
               <span className="whitespace-pre-wrap">{` 22201827                                                                                     `}</span>
-              <span className="text-[#3a394d] whitespace-pre-wrap">{`Year of Passing     : `}</span>
-              <span className="text-[#55848c] whitespace-pre-wrap">{`  2026                                      `}</span>
+              <span className="text-[var(--text-primary)] whitespace-pre-wrap">{`Year of Passing     : `}</span>
+              <span className="text-primary whitespace-pre-wrap">{`  2026                                      `}</span>
             </span>
           </p>
           <p className="m-0">
             <span className="whitespace-pre-wrap" style={resultStyle}>
-              <span className="text-[#3a394d] whitespace-pre-wrap">{`Result                        :  `}</span>
+              <span className="text-[var(--text-primary)] whitespace-pre-wrap">{`Result                        :  `}</span>
               <span className="whitespace-pre-wrap">{`CGPA- 3.74                                                                                   `}</span>
-              <span className="text-[#3a394d] whitespace-pre-wrap">
+              <span className="text-[var(--text-primary)] whitespace-pre-wrap">
                 Current Institute :
               </span>
-              <span className="text-[#55848c] whitespace-pre-wrap"> Yes</span>
+              <span className="text-primary whitespace-pre-wrap"> Yes</span>
             </span>
           </p>
-          <p className="m-0 text-[#3a394d]">
+          <p className="m-0 text-[var(--text-primary)]">
             <span className="whitespace-pre-wrap" style={blankLineStyle}>
               <span className="whitespace-pre-wrap">&nbsp;</span>
             </span>
@@ -254,44 +254,44 @@ const FrameComponent2 = ({
               <span className="whitespace-pre-wrap" style={instituteStyle}>
                 Institute :
               </span>
-              <span className="text-[#3a394d] whitespace-pre-wrap">{`  `}</span>
+              <span className="text-[var(--text-primary)] whitespace-pre-wrap">{`  `}</span>
               <span className="whitespace-pre-wrap">{`Dhaka College                                                                              `}</span>
             </span>
             <span className="text-[1.563rem]">
-              <span className="text-[#3a394d] whitespace-pre-wrap">{`Curriculum            :    `}</span>
-              <span className="text-[#55848c]">Bangla Version</span>
+              <span className="text-[var(--text-primary)] whitespace-pre-wrap">{`Curriculum            :    `}</span>
+              <span className="text-primary">Bangla Version</span>
             </span>
           </p>
           <p className="m-0">
             <span className="whitespace-pre-wrap">
-              <span className="text-[#3a394d] whitespace-pre-wrap">{`Exam/Degree Title  :  `}</span>
+              <span className="text-[var(--text-primary)] whitespace-pre-wrap">{`Exam/Degree Title  :  `}</span>
               <span className="whitespace-pre-wrap">{`HSC                                                                                                `}</span>
-              <span className="text-[#3a394d] whitespace-pre-wrap">{`From Date                 :    `}</span>
-              <span className="text-[#55848c]">2019-07-15</span>
+              <span className="text-[var(--text-primary)] whitespace-pre-wrap">{`From Date                 :    `}</span>
+              <span className="text-primary">2019-07-15</span>
             </span>
           </p>
           <p className="m-0">
             <span className="whitespace-pre-wrap" style={majorGroupSciStyle}>
-              <span className="text-[#3a394d] whitespace-pre-wrap">{`Major/Group            :  `}</span>
+              <span className="text-[var(--text-primary)] whitespace-pre-wrap">{`Major/Group            :  `}</span>
               <span className="whitespace-pre-wrap">{` Science                                                                                         `}</span>
-              <span className="text-[#3a394d] whitespace-pre-wrap">
+              <span className="text-[var(--text-primary)] whitespace-pre-wrap">
                 To Date :
               </span>
-              <span className="text-[#55848c] whitespace-pre-wrap">{`    2022-02-13   `}</span>
+              <span className="text-primary whitespace-pre-wrap">{`    2022-02-13   `}</span>
             </span>
           </p>
           <p className="m-0">
             <span className="whitespace-pre-wrap" style={iDCardNoStyle}>
-              <span className="text-[#3a394d] whitespace-pre-wrap">{`ID Card No                :   `}</span>
+              <span className="text-[var(--text-primary)] whitespace-pre-wrap">{`ID Card No                :   `}</span>
               <span className="whitespace-pre-wrap">{`102041                                                                                        `}</span>
-              <span className="text-[#3a394d] whitespace-pre-wrap">{` Year of Passing       :    `}</span>
-              <span className="text-[#55848c]">2022</span>
+              <span className="text-[var(--text-primary)] whitespace-pre-wrap">{` Year of Passing       :    `}</span>
+              <span className="text-primary">2022</span>
             </span>
           </p>
-          <p className="m-0 text-[#3a394d]">
+          <p className="m-0 text-[var(--text-primary)]">
             <span className="whitespace-pre-wrap" style={result1Style}>
-              <span className="text-[#3a394d] whitespace-pre-wrap">{`Result                        :   `}</span>
-              <span className="text-[#55848c]">GPA 5.0</span>
+              <span className="text-[var(--text-primary)] whitespace-pre-wrap">{`Result                        :   `}</span>
+              <span className="text-primary">GPA 5.0</span>
               <span className="whitespace-pre-wrap">{`                                                                                        Current Institute      :    `}</span>
               <span>No</span>
             </span>

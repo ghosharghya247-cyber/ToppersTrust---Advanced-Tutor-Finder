@@ -12,9 +12,9 @@ const ForgotPass = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState("");
 
-    const primaryColor = "bg-[#6344cc]";
-    const hoverColor = "hover:bg-[#5238a8]";
-    const focusRingColor = "focus:ring-[#6344cc]";
+    const primaryColor = "bg-primary";
+    const hoverColor = "hover:bg-primary-hover";
+    const focusRingColor = "focus:ring-primary";
 
     const handleSubmit = async (e) => {
         e.preventDefault();

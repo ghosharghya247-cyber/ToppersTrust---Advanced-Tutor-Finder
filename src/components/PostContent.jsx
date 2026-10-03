@@ -29,15 +29,15 @@ const PostContent = ({
 
   return (
     <div
-      className={`self-stretch flex flex-row items-start justify-end pt-[0rem] pb-[0.437rem] pl-[0.5rem] pr-[0.437rem] box-border max-w-full text-left text-[1.625rem] text-[#fff] font-roboto ${className}`}
+      className={`self-stretch flex flex-row items-start justify-end pt-[0rem] pb-[0.437rem] pl-[0.5rem] pr-[0.437rem] box-border max-w-full text-left text-[1.625rem] text-[var(--surface)] font-roboto ${className}`}
       style={postContentStyle}
     >
       <div
-        className="flex-1 rounded-11xl [background:linear-gradient(rgba(58,_57,_77,_0.86),_rgba(58,_57,_77,_0.86)),_#000] flex flex-col items-start justify-start pt-[2.25rem] pb-[2.062rem] pl-[4.875rem] pr-[0.312rem] box-border max-w-full z-[6] mq450:pt-[1.438rem] mq450:pb-[1.313rem] mq450:box-border mq750:pl-[2.438rem] mq750:box-border"
+        className="flex-1 rounded-11xl [background:linear-gradient(var(--primary),_var(--primary)),_var(--text-primary)] flex flex-col items-start justify-start pt-[2.25rem] pb-[2.062rem] pl-[4.875rem] pr-[0.312rem] box-border max-w-full z-[6] mq450:pt-[1.438rem] mq450:pb-[1.313rem] mq450:box-border mq750:pl-[2.438rem] mq750:box-border"
         style={postDetailsContainerStyle}
       >
         <div
-          className="w-[47.25rem] h-[28.5rem] relative rounded-11xl [background:linear-gradient(rgba(58,_57,_77,_0.86),_rgba(58,_57,_77,_0.86)),_#000] hidden max-w-full z-[1]"
+          className="w-[47.25rem] h-[28.5rem] relative rounded-11xl [background:linear-gradient(var(--primary),_var(--primary)),_var(--text-primary)] hidden max-w-full z-[1]"
           style={rectangleDivStyle}
         />
         <div className="self-stretch flex flex-row items-start justify-start py-[0rem] pl-[1.437rem] pr-[0rem] box-border max-w-full">

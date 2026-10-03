@@ -12,7 +12,7 @@ const FrameComponent = ({ className = "" }) => {
 
   return (
     <div
-      className={`self-stretch h-[41.375rem] rounded-11xl bg-[rgba(179,179,179,0.15)] border-[#1368a4] border-solid border-[1px] box-border overflow-hidden shrink-0 flex flex-col items-start justify-start pt-[3.187rem] pb-[7.437rem] pl-[1.5rem] pr-[1.25rem] gap-[0.875rem] max-w-full text-left text-[0.938rem] font-roboto lg:pt-[1.313rem] lg:pb-[3.125rem] lg:box-border mq750:h-auto mq750:pt-[1.25rem] mq750:pb-[2rem] mq750:box-border ${className}`}
+      className={`self-stretch h-[41.375rem] rounded-11xl bg-[var(--surface-muted)] border-primary border-solid border-[1px] box-border overflow-hidden shrink-0 flex flex-col items-start justify-start pt-[3.187rem] pb-[7.437rem] pl-[1.5rem] pr-[1.25rem] gap-[0.875rem] max-w-full text-left text-[0.938rem] font-roboto lg:pt-[1.313rem] lg:pb-[3.125rem] lg:box-border mq750:h-auto mq750:pt-[1.25rem] mq750:pb-[2rem] mq750:box-border ${className}`}
     >
       <div className="mt-[-161.907rem] self-stretch flex flex-row items-start justify-start pt-[0rem] pb-[159.218rem] pl-[206.687rem] pr-[0rem] lg:pb-[103.5rem] lg:box-border mq1050:pb-[67.25rem] mq1050:box-border mq450:pl-[1.25rem] mq450:box-border mq750:pl-[103.313rem] mq750:pb-[43.688rem] mq750:box-border">
         <img
@@ -30,7 +30,7 @@ const FrameComponent = ({ className = "" }) => {
         />
       </div>
       <div className="self-stretch flex flex-row items-start justify-end pt-[0rem] px-[2.687rem] pb-[1.437rem] mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border">
-        <div className="w-[19.875rem] relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(#1368a4,_#1368a4),_#000] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] inline-block shrink-0">
+        <div className="w-[19.875rem] relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(var(--primary),_var(--primary)),_var(--text-primary)] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] inline-block shrink-0">
           Guardian/Student ID : 22014
         </div>
       </div>
@@ -42,9 +42,9 @@ const FrameComponent = ({ className = "" }) => {
               alt=""
             />
           </div>
-          <div className="self-stretch flex-1 rounded-mini [background:linear-gradient(#e8f1fd,_#e8f1fd),_#d9d9d9] border-[#e8f1fd] border-solid border-[1px] box-border flex flex-row items-start justify-between pt-[0.687rem] pb-[0.125rem] pl-[12.875rem] pr-[4.125rem] gap-[1.25rem] max-w-full z-[1] mq450:pl-[1.25rem] mq450:box-border mq750:pl-[6.438rem] mq750:pr-[2.063rem] mq750:box-border">
-            <div className="h-[2.75rem] w-[34.563rem] relative rounded-mini [background:linear-gradient(#e8f1fd,_#e8f1fd),_#d9d9d9] border-[#e8f1fd] border-solid border-[1px] box-border hidden max-w-full" />
-            <div className="w-[12.125rem] relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(#1368a4,_#1368a4),_#000] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] inline-block shrink-0 z-[2]">
+          <div className="self-stretch flex-1 rounded-mini [background:linear-gradient(var(--primary-soft),_var(--primary-soft)),_var(--border)] border-[var(--primary-soft)] border-solid border-[1px] box-border flex flex-row items-start justify-between pt-[0.687rem] pb-[0.125rem] pl-[12.875rem] pr-[4.125rem] gap-[1.25rem] max-w-full z-[1] mq450:pl-[1.25rem] mq450:box-border mq750:pl-[6.438rem] mq750:pr-[2.063rem] mq750:box-border">
+            <div className="h-[2.75rem] w-[34.563rem] relative rounded-mini [background:linear-gradient(var(--primary-soft),_var(--primary-soft)),_var(--border)] border-[var(--primary-soft)] border-solid border-[1px] box-border hidden max-w-full" />
+            <div className="w-[12.125rem] relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(var(--primary),_var(--primary)),_var(--text-primary)] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] inline-block shrink-0 z-[2]">
               Profile Completed: 20%
             </div>
             <div className="flex flex-col items-start justify-start pt-[0.5rem] px-[0rem] pb-[0rem]">
@@ -59,7 +59,7 @@ const FrameComponent = ({ className = "" }) => {
       </div>
       <div className="self-stretch h-[4.188rem] flex flex-row items-start justify-start py-[0.812rem] pl-[13.687rem] pr-[13.375rem] box-border relative gap-[0.25rem] mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border mq750:flex-wrap mq750:pl-[6.813rem] mq750:pr-[6.688rem] mq750:box-border">
         <div
-          className="h-[calc(100%_-_24px)] w-full absolute !!m-[0 important] top-[0rem] right-[0rem] bottom-[1.5rem] left-[0rem] rounded-mini [background:linear-gradient(#e8f1fd,_#e8f1fd),_#d9d9d9] cursor-pointer"
+          className="h-[calc(100%_-_24px)] w-full absolute !!m-[0 important] top-[0rem] right-[0rem] bottom-[1.5rem] left-[0rem] rounded-mini [background:linear-gradient(var(--primary-soft),_var(--primary-soft)),_var(--border)] cursor-pointer"
           onClick={onRectangleClick}
         />
         <div className="flex flex-col items-start justify-start pt-[0.062rem] px-[0rem] pb-[0rem]">
@@ -70,12 +70,12 @@ const FrameComponent = ({ className = "" }) => {
             src="/edit.svg"
           />
         </div>
-        <div className="flex-1 relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(#1368a4,_#1368a4),_#000] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] z-[1]">
+        <div className="flex-1 relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(var(--primary),_var(--primary)),_var(--text-primary)] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] z-[1]">
           Edit Profile
         </div>
       </div>
       <div className="w-[16.625rem] flex flex-row items-start justify-start pt-[0rem] px-[2.625rem] pb-[0.812rem] box-border mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border">
-        <div className="flex-1 relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(#1368a4,_#1368a4),_#000] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
+        <div className="flex-1 relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(var(--primary),_var(--primary)),_var(--text-primary)] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
           Email
         </div>
       </div>
@@ -88,7 +88,7 @@ const FrameComponent = ({ className = "" }) => {
         />
       </div>
       <div className="w-[14.063rem] flex flex-row items-start justify-start pt-[0rem] px-[2.625rem] pb-[3.25rem] box-border">
-        <div className="flex-1 relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(#1368a4,_#1368a4),_#000] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] z-[1]">
+        <div className="flex-1 relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(var(--primary),_var(--primary)),_var(--text-primary)] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] z-[1]">
           Contact Number
         </div>
       </div>
@@ -101,7 +101,7 @@ const FrameComponent = ({ className = "" }) => {
         showIcon={false}
       />
       <div className="w-[19.125rem] flex flex-row items-start justify-start py-[0rem] px-[2.187rem] box-border">
-        <div className="flex-1 relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(#1368a4,_#1368a4),_#000] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] whitespace-pre-wrap">
+        <div className="flex-1 relative font-semibold text-transparent !bg-clip-text [background:linear-gradient(var(--primary),_var(--primary)),_var(--text-primary)] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] whitespace-pre-wrap">
           {" "}
           Address
         </div>
