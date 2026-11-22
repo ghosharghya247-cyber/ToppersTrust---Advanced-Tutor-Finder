@@ -11,19 +11,20 @@ import {
 } from "@mui/material";
 
 import "./global.css";
+import "./marketplace.css";
 
 const muiTheme = createTheme({
   palette: {
-    primary: { main: "#1769F5", dark: "#0F56D9", light: "#EEF5FF" },
-    secondary: { main: "#0F56D9" },
-    background: { default: "#FFFFFF", paper: "#FFFFFF" },
-    text: { primary: "#0A0A0B", secondary: "#596273", disabled: "#8A93A3" },
-    divider: "#E3E7ED",
-    success: { main: "#16A36A" },
-    warning: { main: "#F5A623" },
+    primary: { main: "#542D46", dark: "#402035", light: "#F5E9ED" },
+    secondary: { main: "#402035" },
+    background: { default: "#FFFCF9", paper: "#FFFFFF" },
+    text: { primary: "#302832", secondary: "#706670", disabled: "#887B86" },
+    divider: "#E4D9DF",
+    success: { main: "#36704E" },
+    warning: { main: "#BA8124" },
     error: { main: "#E5484D" },
   },
-  typography: { fontFamily: "'DM Sans', Arial, sans-serif" },
+  typography: { fontFamily: "'Manrope', Arial, sans-serif" },
   shape: { borderRadius: 8 },
 });
 

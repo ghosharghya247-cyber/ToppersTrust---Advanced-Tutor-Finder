@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, BookOpen, Sparkles } from "lucide-react";
-import { LearningArtwork } from "./Primitives";
+import { ArrowLeft, BookOpen } from "lucide-react";
 export default function AuthLayout({
-  eyebrow = "YOUR NEXT CHAPTER",
   title,
   description,
   children,
@@ -12,31 +10,33 @@ export default function AuthLayout({
     <div className={`auth-layout ${wide ? "auth-wide" : ""}`}>
       <aside className="auth-aside">
         <Link to="/" className="text-link">
-          <ArrowLeft size={16} /> Back to home
+          <ArrowLeft size={16} />
+          Back to home
         </Link>
-        <div>
-          <span className="eyebrow">
-            <Sparkles size={14} /> LEARNING, WITH A HUMAN TOUCH
-          </span>
+        <div className="auth-welcome">
           <h2>
-            A brighter future
+            Good guidance.
             <br />
-            starts with <em>you.</em>
+            Growing confidence.
           </h2>
           <p>
-            Find the right guidance. Share what you know.
-            <br />
-            Make room for something extraordinary.
+            A place for curious minds, dedicated teachers, and the people
+            cheering them on.
           </p>
         </div>
-        <LearningArtwork />
+        <img
+          className="auth-learning-photo"
+          src="/images/learning-together.webp"
+          alt="A tutor helping a learner with her studies"
+          width="1536"
+          height="1024"
+        />
         <p className="aside-footnote">
-          <BookOpen size={17} /> A community built around your potential.
+          <BookOpen size={18} />A good place to grow.
         </p>
       </aside>
       <section className="auth-form-side">
         <div className="auth-form-card">
-          <p className="eyebrow">{eyebrow}</p>
           <h1>{title}</h1>
           <p className="form-description">{description}</p>
           {children}

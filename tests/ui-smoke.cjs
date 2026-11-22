@@ -51,6 +51,9 @@ const tutors = Array.from({ length: 8 }, (_, i) => ({
     "Imran Ali",
   ][i],
   qualification: "Mathematics",
+  expected_salary: i % 2 ? 9000 : 6000,
+  available_time: i % 2 ? "6 PM – 9 PM" : "4 PM – 7 PM",
+  gender: i % 2 ? "Male" : "Female",
   rating: 4 + i / 10,
   city: i % 2 ? "Chattogram" : "Dhaka",
   preferred_areas: i % 2 ? "Chattogram" : "Dhanmondi",
@@ -108,6 +111,8 @@ const token = () =>
 async function mock(route) {
   const url = new URL(route.request().url());
   if (url.origin === new URL(base).origin) return route.continue();
+  if (["fonts.googleapis.com", "fonts.gstatic.com"].includes(url.hostname))
+    return route.continue();
   if (url.pathname.startsWith("/auth/v1/")) {
     if (url.pathname.endsWith("/token"))
       return route.fulfill({
@@ -214,8 +219,121 @@ async function main() {
     await context.route("**/*", mock);
     const page = await context.newPage();
     page.on("pageerror", (error) => runtimeErrors.push(error.message));
+    await page.goto(base);
+    await page
+      .getByRole("heading", { name: "The right tutor. A brighter tomorrow." })
+      .waitFor();
+    await page.evaluate(() => document.fonts.ready);
+    assert.equal(
+      await page
+        .locator(".welcome-photo img")
+        .evaluate((e) => e.complete && e.naturalWidth > 0),
+      true,
+    );
+    await page.screenshot({ path: "/tmp/tt-home-desktop.png", fullPage: true });
+    await page
+      .getByLabel("Subject", { exact: true })
+      .selectOption("Mathematics");
+    await page.getByLabel("Location", { exact: true }).fill("Dhanmondi");
+    await page
+      .getByRole("button", { name: "Search tutors", exact: true })
+      .click();
+    await page.getByRole("dialog").waitFor();
+    assert.equal(
+      new URL(page.url()).searchParams.get("subject"),
+      "Mathematics",
+    );
+    assert.equal(new URL(page.url()).searchParams.get("location"), "Dhanmondi");
+    await page.getByRole("button", { name: "Not now", exact: true }).click();
+    await page.getByRole("link", { name: "Log in to explore" }).count();
+    await page.goto(base + "/login");
+    await page
+      .getByLabel("Email address", { exact: true })
+      .fill("ui-test@example.invalid");
+    await page
+      .getByLabel("Password", { exact: true })
+      .fill("fixture-only-password");
+    await page.getByRole("button", { name: "Show password" }).click();
+    assert.equal(
+      await page.getByLabel("Password", { exact: true }).getAttribute("type"),
+      "text",
+    );
+    await page.getByRole("button", { name: "Hide password" }).click();
+    await page.getByRole("button", { name: "Log in", exact: true }).click();
+    await page
+      .getByRole("alert")
+      .filter({ hasText: "select your role" })
+      .waitFor();
+    await page.getByRole("button", { name: "Guardian" }).click();
+    await page.getByRole("button", { name: "Log in", exact: true }).click();
+    await page.waitForURL("**/guardian-dashboard");
     await authenticate(page, "guardian");
     await goto(page, "/browse-tutors", "Find your next guide.");
+    await page.getByLabel("Subject", { exact: true }).selectOption("English");
+    await page
+      .getByRole("heading", { name: "Let’s find another fit." })
+      .waitFor();
+    await page
+      .getByRole("button", { name: "Clear search and filters" })
+      .click();
+    await page.getByLabel("Location", { exact: true }).fill("Dhanmondi");
+    assert.equal(
+      await page.locator(".educator-grid .educator-card").count(),
+      4,
+    );
+    await page
+      .getByLabel("Monthly budget", { exact: true })
+      .selectOption("5000");
+    assert.equal(
+      await page.locator(".educator-grid .educator-card").count(),
+      0,
+    );
+    await page
+      .getByLabel("Monthly budget", { exact: true })
+      .selectOption("8000");
+    assert.equal(
+      await page.locator(".educator-grid .educator-card").count(),
+      4,
+    );
+    await page
+      .getByLabel("Availability", { exact: true })
+      .selectOption("4 PM – 7 PM");
+    assert.equal(
+      await page.locator(".educator-grid .educator-card").count(),
+      4,
+    );
+    await page
+      .getByLabel("Tutor preference", { exact: true })
+      .selectOption("Male");
+    assert.equal(
+      await page.locator(".educator-grid .educator-card").count(),
+      0,
+    );
+    await page
+      .getByRole("button", { name: "Clear filters", exact: true })
+      .click();
+    await page.getByLabel("Sort by", { exact: true }).selectOption("price");
+    assert.ok(
+      (
+        await page
+          .locator(".educator-grid .educator-card")
+          .first()
+          .textContent()
+      ).includes("৳6,000"),
+    );
+    await page.getByLabel("Sort by", { exact: true }).selectOption("default");
+    await page.screenshot({
+      path: "/tmp/tt-discovery-before-selection.png",
+      fullPage: true,
+    });
+    await page.setViewportSize({ width: 1536, height: 1024 });
+    await page.locator(".educator-grid .educator-card").first().waitFor();
+    await page.screenshot({
+      path: "/tmp/tt-discovery-1536.png",
+      fullPage: true,
+    });
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.locator(".educator-grid .educator-card").first().waitFor();
     assert.equal(
       await page.locator(".educator-grid .educator-card").count(),
       6,
@@ -415,7 +533,41 @@ async function main() {
           });
       }
     }
+    for (const width of [360, 390, 768, 1440, 1536]) {
+      await page.setViewportSize({ width, height: 1024 });
+      await page.goto(base);
+      await page
+        .getByRole("heading", { name: "The right tutor. A brighter tomorrow." })
+        .waitFor();
+      await noOverflow(page, "home @ " + width);
+      if (width === 390 || width === 1536)
+        await page.screenshot({
+          path: "/tmp/tt-home-" + width + ".png",
+          fullPage: true,
+        });
+      for (const route of [
+        "/login",
+        "/sign-up-frame",
+        "/forgot-pass",
+        "/update-password",
+      ]) {
+        await page.goto(base + route);
+        await page.locator(".auth-form-card h1").waitFor();
+        await noOverflow(page, route + " @ " + width);
+      }
+    }
     await page.setViewportSize({ width: 390, height: 844 });
+    await goto(page, "/browse-tutors", "Find your next guide.");
+    await page.getByRole("button", { name: "Refine your search" }).click();
+    await page
+      .getByLabel("Subject", { exact: true })
+      .selectOption("Mathematics");
+    await page.getByLabel("Location", { exact: true }).fill("Dhanmondi");
+    await page.getByRole("button", { name: "Refine your search" }).click();
+    await page.screenshot({
+      path: "/tmp/tt-discovery-mobile.png",
+      fullPage: true,
+    });
     await page.getByRole("button", { name: "Open navigation" }).click();
     await page.getByRole("navigation", { name: "Mobile navigation" }).waitFor();
     await page.keyboard.press("Escape");
@@ -426,7 +578,7 @@ async function main() {
     );
     assert.deepEqual(runtimeErrors, []);
     console.log(
-      "PASS: 13 routes at 4 viewport sizes; search, pagination, subject chips, date/address entry, profile sections, accessible dialogs, request submission, failed/successful selection, mobile navigation. All writes intercepted.",
+      "PASS: 13 workspace routes at 4 viewport sizes; homepage and 4 authentication routes at 5 viewport sizes; all 5 discovery filters, URL search handoff, sorting, pagination, login, subject chips, date/address entry, profile sections, accessible dialogs, request submission, failed/successful selection, tuition applications, payment-return handling, and mobile navigation. All data writes intercepted.",
     );
   } finally {
     await browser.close();

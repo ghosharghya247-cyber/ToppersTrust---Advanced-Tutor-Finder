@@ -2,6 +2,8 @@ import {
   ArrowLeft,
   ArrowRight,
   Check,
+  CalendarDays,
+  ChevronDown,
   GraduationCap,
   MapPin,
   RotateCcw,
@@ -62,57 +64,84 @@ export function SearchFilters({
 export function TutorPreview({ tutor, children, compact = false }) {
   const name = tutor.name || tutor.displayName || "Tutor";
   const rating = Number(tutor.rating);
+  const subjects = Array.isArray(tutor.preferred_subjects)
+    ? tutor.preferred_subjects
+    : String(tutor.preferred_subjects || "")
+        .split(/[,;]+/)
+        .map((s) => s.trim())
+        .filter(Boolean);
+  const rawPrice = tutor.expectedSalary ?? tutor.expected_salary;
+  const price = Number(String(rawPrice ?? "").replace(/[^0-9.]/g, ""));
+  const time = tutor.availableTime || tutor.available_time;
   return (
-    <article className={"educator-card " + (compact ? "compact" : "")}>
-      <div className="educator-top">
+    <article
+      className={
+        "educator-card tutor-profile-row " + (compact ? "compact" : "")
+      }
+    >
+      <div className="tutor-row-main">
         <Avatar
           name={name}
           src={tutor.profileImageUrl || tutor.photoUrl || tutor.photo}
           size="large"
         />
-        <span className="badge">
-          <GraduationCap size={14} /> Educator
-        </span>
+        <div className="tutor-row-bio">
+          <h2>{name}</h2>
+          <p className="educator-school">
+            <GraduationCap size={16} />
+            {tutor.university ||
+              tutor.uni ||
+              tutor.qualification ||
+              "Education not provided"}
+          </p>
+          <div className="tutor-subjects">
+            {subjects.length ? (
+              subjects.map((subject) => <span key={subject}>{subject}</span>)
+            ) : (
+              <span className="subject-unspecified">
+                Subjects not specified
+              </span>
+            )}
+          </div>
+          <p className="educator-location">
+            <MapPin size={15} />
+            {tutor.location ||
+              tutor.preferred_areas ||
+              tutor.city ||
+              "Location not provided"}
+          </p>
+          <div className="tutor-meta">
+            <span>
+              <Star size={14} />
+              {rating > 0 ? rating.toFixed(1) + " / 5" : "Not yet rated"}
+            </span>
+            <span>
+              {tutor.experience_years != null
+                ? tutor.experience_years + " years experience"
+                : "Experience not provided"}
+            </span>
+          </div>
+        </div>
+        <div className="tutor-row-booking">
+          <p className="tutor-price">
+            {price > 0
+              ? "৳" + price.toLocaleString("en-BD")
+              : rawPrice || "Price on enquiry"}
+          </p>
+          <span className="price-period">
+            {price > 0 ? "expected per month" : "Discuss with the tutor"}
+          </span>
+          <p className="tutor-time">
+            <CalendarDays size={16} />
+            {time || "Availability not specified"}
+          </p>
+          {children && <div className="educator-actions">{children}</div>}
+        </div>
       </div>
-      <h2>{name}</h2>
-      <p className="educator-school">
-        {tutor.university ||
-          tutor.uni ||
-          tutor.qualification ||
-          "ToppersTrust educator"}
-      </p>
-      <p className="educator-location">
-        <MapPin size={15} />
-        {tutor.location || tutor.city || "Location not provided"}
-      </p>
-      <div className="educator-highlights">
-        <span>
-          <Star size={14} />
-          {rating > 0 ? rating.toFixed(1) + " / 5" : "Not yet rated"}
-        </span>
-        <span>
-          {tutor.experience_years != null
-            ? tutor.experience_years + " years experience"
-            : "Experience not provided"}
-        </span>
-      </div>
-      <InfoGrid
-        fields={[
-          [
-            "Expected salary",
-            tutor.expectedSalary || tutor.expected_salary
-              ? "৳" + (tutor.expectedSalary || tutor.expected_salary)
-              : "Not specified",
-          ],
-          [
-            "Availability",
-            tutor.availableTime || tutor.available_time || "Not specified",
-          ],
-        ]}
-      />
       <details className="educator-more">
         <summary>
-          Education & teaching details <span>+</span>
+          Education & teaching details
+          <ChevronDown size={17} />
         </summary>
         <InfoGrid
           fields={[
@@ -124,12 +153,13 @@ export function TutorPreview({ tutor, children, compact = false }) {
             ["Subjects", tutor.preferred_subjects],
             ["Classes", tutor.preferred_classes],
             ["Medium", tutor.medium],
+            ["Teaching method", tutor.tutoring_method],
+            ["Teaching approach", tutor.tutoring_style],
             ["SSC", tutor.sscInfo || tutor.ssc_school],
             ["HSC", tutor.hscInfo || tutor.hsc_school],
           ]}
         />
       </details>
-      {children && <div className="educator-actions">{children}</div>}
     </article>
   );
 }

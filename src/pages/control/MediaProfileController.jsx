@@ -53,7 +53,7 @@ const MediaProfileController = () => {
   }, [navigate]);
 
   // --- View Helpers (Data for the View) ---
-  const profileImageFallback = "https://placehold.co/200x200/1769F5/FFF?text=" +
+  const profileImageFallback = "https://placehold.co/200x200/F5E9ED/542D46?text=" +
     (mediaData.name && mediaData.name !== "Loading..." ? mediaData.name.split(' ').map(n=>n[0]).join('') : "M");
 
   if (loading) {

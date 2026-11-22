@@ -98,8 +98,8 @@ const GuardianProfileView = () => {
 
     // Generate fallback image
     const profileImageFallback = profileData?.name 
-        ? `https://placehold.co/200x200/1769F5/FFF?text=${profileData.name.split(' ').map(n=>n[0]).join('')}`
-        : "https://placehold.co/200x200/1769F5/FFF?text=G";
+        ? `https://placehold.co/200x200/F5E9ED/542D46?text=${profileData.name.split(' ').map(n=>n[0]).join('')}`
+        : "https://placehold.co/200x200/F5E9ED/542D46?text=G";
 
     // Loading state
     if (loading) {

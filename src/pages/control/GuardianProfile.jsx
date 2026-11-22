@@ -51,7 +51,7 @@ const GuardianProfile = () => {
   }, [navigate]);
 
   // --- View Helpers (Data for the View) ---
-  const profileImageFallback = "https://placehold.co/200x200/1769F5/FFF?text=" +
+  const profileImageFallback = "https://placehold.co/200x200/F5E9ED/542D46?text=" +
     (guardianData.name && guardianData.name !== "Loading..." ? guardianData.name.split(' ').map(n=>n[0]).join('') : "G");
 
   if (loading) {

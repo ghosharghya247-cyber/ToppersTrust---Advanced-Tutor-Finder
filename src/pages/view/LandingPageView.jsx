@@ -1,249 +1,322 @@
-import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   ArrowRight,
-  ArrowUpRight,
   BookOpen,
-  Check,
-  Compass,
+  CalendarDays,
+  ChevronRight,
+  Coins,
   GraduationCap,
+  MapPin,
+  Plus,
+  Search,
   ShieldCheck,
-  Sparkles,
+  Users,
 } from "lucide-react";
 import {
   RolePicker,
   PasswordField,
   Notice,
-  LearningArtwork,
 } from "../../components/ui/Primitives";
-export default function LandingPageView({
-  role,
-  email,
-  password,
-  showPassword,
-  isLoading,
-  signInError,
-  handleRoleSelect,
-  handleEmailChange,
-  handlePasswordChange,
-  toggleShowPassword,
-  handleSignIn,
-}) {
-  const { hash } = useLocation();
+import AuthLayout from "../../components/ui/AuthLayout";
+
+function LoginForm(p) {
+  return (
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        p.handleSignIn();
+      }}
+    >
+      <RolePicker value={p.role} onChange={p.handleRoleSelect} />
+      <div className="field">
+        <label htmlFor="login-email">Email address</label>
+        <input
+          id="login-email"
+          type="email"
+          autoComplete="email"
+          placeholder="you@example.com"
+          value={p.email}
+          onChange={p.handleEmailChange}
+          required
+        />
+      </div>
+      <PasswordField
+        id="login-password"
+        label="Password"
+        value={p.password}
+        onChange={p.handlePasswordChange}
+        visible={p.showPassword}
+        onToggle={p.toggleShowPassword}
+      />
+      <div className="form-support">
+        <span>
+          <ShieldCheck size={14} /> Secure sign-in
+        </span>
+        <Link to="/forgot-pass">Forgot password?</Link>
+      </div>
+      <Notice error>{p.signInError}</Notice>
+      <button
+        className="button button-primary button-full"
+        disabled={p.isLoading}
+        type="submit"
+      >
+        {p.isLoading ? "Signing you in…" : "Log in"}
+        <ArrowRight size={18} />
+      </button>
+      <p className="auth-switch">
+        New to ToppersTrust? <Link to="/sign-up-frame">Create an account</Link>
+      </p>
+    </form>
+  );
+}
+const subjects = [
+  ["Mathematics", "π", "Build strong concepts. Solve with confidence.", "rose"],
+  ["Science", "⚛", "Make sense of the world around you.", "green"],
+  ["English", "Aa", "Find your voice, one word at a time.", "honey"],
+  ["Bangla", "অ", "A stronger connection to language.", "lilac"],
+];
+const questions = [
+  [
+    "Who can join ToppersTrust?",
+    "Guardians looking for learning support, tutors looking for opportunities, and tuition media partners can all create an account. Choose your role when signing up.",
+  ],
+  [
+    "How do I find the right tutor?",
+    "Search by subject and area, then compare tutors’ education, experience, availability, and expected salary. Sign in as a guardian to express interest, or post a tuition with your requirements.",
+  ],
+  [
+    "Can I manage my tutoring profile?",
+    "Yes. Sign in as a tutor to update your profile, explore tuition opportunities, and manage your account from your workspace.",
+  ],
+];
+export default function LandingPageView(props) {
+  const { pathname, hash } = useLocation();
+  const navigate = useNavigate();
+  const [subject, setSubject] = useState("");
+  const [location, setLocation] = useState("");
   useEffect(() => {
     if (hash)
       document
         .getElementById(hash.slice(1))
-        ?.scrollIntoView({ behavior: "smooth" });
+        ?.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+            .matches
+            ? "instant"
+            : "smooth",
+        });
   }, [hash]);
+  if (pathname === "/login")
+    return (
+      <AuthLayout
+        title="Welcome back."
+        description="Your next connection is just a sign-in away."
+      >
+        <LoginForm {...props} />
+      </AuthLayout>
+    );
+  const search = (event) => {
+    event.preventDefault();
+    const params = new URLSearchParams();
+    if (subject) params.set("subject", subject);
+    if (location.trim()) params.set("location", location.trim());
+    navigate("/browse-tutors" + (params.size ? "?" + params.toString() : ""));
+  };
   return (
-    <div className="landing">
-      <section className="hero-grid">
-        <div className="hero-copy">
-          <span className="eyebrow">
-            <span className="status-dot" /> GOOD GUIDANCE. GREAT POSSIBILITIES.
-          </span>
+    <div className="market-home">
+      <section className="welcome-hero">
+        <div className="welcome-copy">
           <h1>
-            A little guidance.
-            <br />A <em>world</em> of
-            <br />
-            possibility.
+            The right tutor.
+            <br />A brighter
+            <br className="hero-line-break" /> tomorrow.
           </h1>
-          <p className="hero-description">
-            The right tutor does more than teach a subject.
-            <br className="desktop-only" /> They help you discover what you’re
-            capable of.
+          <p>
+            A little support can change everything. Find a tutor who understands
+            your learner, your goals, and your everyday life.
           </p>
-          <div className="hero-actions">
-            <Link to="/browse-tutors" className="button button-primary">
-              Find your tutor <ArrowUpRight size={19} />
-            </Link>
-            <Link to="/job-card" className="text-link">
-              I want to teach <ArrowRight size={17} />
-            </Link>
-          </div>
-          <div className="hero-reassurance">
-            <span>
-              <Check size={15} /> Learning that fits you
-            </span>
-            <span>
-              <Check size={15} /> Connections across Bangladesh
-            </span>
-          </div>
-          <LearningArtwork />
-        </div>
-        <div className="login-column">
-          <section className="login-card" aria-labelledby="login-title">
-            <span className="eyebrow">
-              <BookOpen size={15} /> YOUR NEXT CHAPTER
-            </span>
-            <h2 id="login-title">
-              Welcome to your
-              <br />
-              learning space.
-            </h2>
-            <p className="muted">New possibilities are just a sign-in away.</p>
-            <form
-              onSubmit={(event) => {
-                event.preventDefault();
-                handleSignIn();
-              }}
-            >
-              <RolePicker value={role} onChange={handleRoleSelect} />
-              <div className="field">
-                <label htmlFor="login-email">Email address</label>
+          <form
+            className="hero-search"
+            onSubmit={search}
+            aria-label="Find a tutor"
+          >
+            <div className="hero-search-field">
+              <BookOpen size={19} />
+              <div>
+                <label htmlFor="home-subject">Subject</label>
+                <select
+                  id="home-subject"
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
+                >
+                  <option value="">All subjects</option>
+                  {[
+                    "Mathematics",
+                    "Physics",
+                    "Chemistry",
+                    "Science",
+                    "English",
+                    "Bangla",
+                    "Biology",
+                    "ICT",
+                  ].map((s) => (
+                    <option key={s}>{s}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className="hero-search-field">
+              <MapPin size={19} />
+              <div>
+                <label htmlFor="home-location">Location</label>
                 <input
-                  id="login-email"
-                  type="email"
-                  autoComplete="email"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={handleEmailChange}
-                  required
+                  id="home-location"
+                  placeholder="City or area"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
                 />
               </div>
-              <PasswordField
-                id="login-password"
-                label="Password"
-                value={password}
-                onChange={handlePasswordChange}
-                visible={showPassword}
-                onToggle={toggleShowPassword}
-              />
-              <div className="form-support">
-                <span>
-                  <ShieldCheck size={14} /> Your space, securely
-                </span>
-                <Link to="/forgot-pass">Forgot password?</Link>
-              </div>
-              <Notice error>{signInError}</Notice>
-              <button
-                className="button button-primary button-full"
-                disabled={isLoading}
-                type="submit"
-              >
-                {isLoading ? "Signing you in…" : "Let’s get learning"}
-                <ArrowRight size={18} />
-              </button>
-            </form>
-            <p className="auth-switch">
-              New to ToppersTrust?{" "}
-              <Link to="/sign-up-frame">
-                Create an account <ArrowUpRight size={13} />
+            </div>
+            <button className="button button-primary" type="submit">
+              <Search size={18} />
+              <span>Search tutors</span>
+            </button>
+          </form>
+          <div className="popular-subjects">
+            <span>Popular:</span>
+            {["Mathematics", "English", "Physics"].map((s) => (
+              <Link key={s} to={"/browse-tutors?subject=" + s}>
+                {s}
               </Link>
-            </p>
-          </section>
-          <div className="login-footnote">
-            <Sparkles size={20} />
-            <p>
-              For curious minds. For dedicated teachers.
-              <br />
-              <strong>For a brighter tomorrow.</strong>
-            </p>
+            ))}
           </div>
         </div>
+        <figure className="welcome-photo">
+          <img
+            src="/images/learning-together.webp"
+            alt="A tutor and learner sharing a moment of understanding over their studies"
+            fetchPriority="high"
+            width="1536"
+            height="1024"
+          />
+          <figcaption>
+            <BookOpen size={22} />
+            <span>
+              Good guidance.
+              <br />
+              Growing confidence.
+            </span>
+          </figcaption>
+        </figure>
       </section>
       <section
-        className="subject-strip"
-        aria-label="Explore learning opportunities"
+        className="learning-promises"
+        aria-label="Learning that fits your family"
       >
-        <span>
-          Room for every
-          <br />
-          <strong>kind of learner.</strong>
-        </span>
-        {["Mathematics", "Science", "English", "Bangla", "And beyond"].map(
-          (item, i) => (
-            <Link key={item} to="/browse-tutors">
-              <span className="subject-symbol">
-                {["∑", "⚛", "Aa", "অ", "↗"][i]}
-              </span>
-              {item}
-            </Link>
-          ),
-        )}
+        {[
+          [Users, "Get to know your tutor"],
+          [CalendarDays, "Learning on your schedule"],
+          [Coins, "Clear monthly pricing"],
+        ].map(([Icon, text]) => (
+          <div key={text}>
+            <Icon size={24} strokeWidth={1.6} />
+            <span>{text}</span>
+          </div>
+        ))}
       </section>
-      <section id="how-it-works" className="how-section">
-        <div className="section-intro">
-          <span className="eyebrow">LESS SEARCHING. MORE LEARNING.</span>
-          <h2>
-            Your next chapter,
-            <br />
-            <em>in three simple steps.</em>
-          </h2>
-          <p>
-            From the first connection to the first breakthrough,
-            <br />
-            make room for a better learning experience.
-          </p>
+      <section className="subject-index">
+        <div className="market-section-heading">
+          <h2>A subject for every ambition.</h2>
+          <Link className="text-link" to="/browse-tutors">
+            Explore all subjects
+            <ChevronRight size={17} />
+          </Link>
         </div>
-        <div className="steps-grid">
-          {[
-            {
-              Icon: Compass,
-              title: "Find your fit",
-              copy: "Explore tutors or share your learning needs. Find someone who understands your goals.",
-            },
-            {
-              Icon: BookOpen,
-              title: "Make a connection",
-              copy: "Build your shortlist, review profiles, and choose the guidance that feels right.",
-            },
-            {
-              Icon: GraduationCap,
-              title: "Grow together",
-              copy: "Turn curiosity into confidence, one lesson and one small achievement at a time.",
-            },
-          ].map(({ Icon, title, copy }, i) => (
-            <article className="step-card" key={title}>
-              <div className="step-top">
-                <Icon size={27} />
-                <span>0{i + 1}</span>
-              </div>
-              <h3>{title}</h3>
-              <p>{copy}</p>
-            </article>
+        <div className="subject-paths">
+          {subjects.map(([name, symbol, description, tone]) => (
+            <Link
+              className={"subject-path " + tone}
+              key={name}
+              to={"/browse-tutors?subject=" + encodeURIComponent(name)}
+            >
+              <span className="subject-path-symbol" aria-hidden="true">
+                {symbol}
+              </span>
+              <h3>{name}</h3>
+              <p>{description}</p>
+              <span className="subject-explore">
+                Find a tutor
+                <ChevronRight size={16} />
+              </span>
+            </Link>
           ))}
         </div>
       </section>
-      <section className="join-banner">
+      <section id="how-it-works" className="learning-steps">
         <div>
-          <span className="eyebrow">KNOWLEDGE IS BETTER SHARED</span>
+          <h2>
+            A little guidance.
+            <br />A lasting difference.
+          </h2>
+          <p>
+            Finding a tutor is personal. We make it easier to understand your
+            options and take the next step with confidence.
+          </p>
+          <Link to="/browse-tutors" className="text-link">
+            Find your tutor
+            <ChevronRight size={17} />
+          </Link>
+        </div>
+        <ol>
+          {[
+            [
+              "Tell us what you need",
+              "Choose a subject, your area, and a budget that works for your family.",
+            ],
+            [
+              "Find your kind of teacher",
+              "Compare education, experience, availability, and monthly pricing.",
+            ],
+            [
+              "Start a conversation",
+              "Sign in to express interest, or post a tuition with your requirements.",
+            ],
+          ].map(([title, copy], i) => (
+            <li key={title}>
+              <span className="step-number">{i + 1}</span>
+              <div>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+      <section className="teacher-invitation">
+        <GraduationCap size={38} strokeWidth={1.4} />
+        <div>
           <h2>
             Someone’s next breakthrough
-            <br />
-            could start with you.
+            <br /> could start with you.
           </h2>
           <p>Bring your expertise. Help a learner find their confidence.</p>
         </div>
-        <Link to="/sign-up-frame" className="button button-light">
-          Start your journey <ArrowUpRight size={19} />
+        <Link className="button button-honey" to="/sign-up-frame">
+          Become a tutor
+          <ChevronRight size={18} />
         </Link>
       </section>
-      <section className="faq-section">
+      <section className="market-faq">
+        <h2>
+          A little clarity
+          <br /> before you begin.
+        </h2>
         <div>
-          <span className="eyebrow">A LITTLE CLARITY</span>
-          <h2>Before you begin.</h2>
-        </div>
-        <div className="faq-items">
-          {[
-            [
-              "Who can join ToppersTrust?",
-              "Guardians looking for learning support, tutors looking for opportunities, and tuition media partners can all create an account. Choose your role when signing up.",
-            ],
-            [
-              "How do I find the right tutor?",
-              "Browse tutor profiles or sign in as a guardian to post your requirements. Review subjects, qualifications, and location to build your shortlist.",
-            ],
-            [
-              "Can I manage my tutoring profile?",
-              "Yes. Sign in as a tutor to update your profile, explore tuition opportunities, and manage your account from your workspace.",
-            ],
-          ].map(([q, a]) => (
+          {questions.map(([q, a]) => (
             <details key={q}>
               <summary>
                 {q}
-                <span>+</span>
+                <Plus size={20} />
               </summary>
               <p>{a}</p>
             </details>

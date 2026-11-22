@@ -176,11 +176,11 @@ const GuardianProfileEditController = () => {
 
   // Generate fallback image for preview
   const profileImageFallback = formData.name
-    ? `https://placehold.co/200x200/1769F5/FFF?text=${formData.name
+    ? `https://placehold.co/200x200/F5E9ED/542D46?text=${formData.name
         .split(" ")
         .map((n) => n[0])
         .join("")}`
-    : "https://placehold.co/200x200/1769F5/FFF?text=G";
+    : "https://placehold.co/200x200/F5E9ED/542D46?text=G";
 
   // Loading state
   if (loading) return <LoadingState label="Opening your profile editor…" />;

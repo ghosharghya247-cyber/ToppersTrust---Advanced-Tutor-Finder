@@ -4,38 +4,38 @@
 @config "../tailwind.config.js";
 
 :root {
-  font-family: "DM Sans", Arial, sans-serif;
-  color: #0a0a0b;
+  font-family: "Manrope", Arial, sans-serif;
+  color: #302832;
   background: #ffffff;
   font-synthesis: none;
 
   /* Brand */
-  --primary: #1769f5;
-  --primary-hover: #0f56d9;
-  --primary-soft: #eef5ff;
+  --primary: #542d46;
+  --primary-hover: #402035;
+  --primary-soft: #f5e9ed;
 
   /* Surfaces */
-  --background: #ffffff;
+  --background: #fffcf9;
   --surface: #ffffff;
-  --surface-subtle: #f8fafc;
-  --surface-muted: #f4f6f8;
+  --surface-subtle: #fcf8f8;
+  --surface-muted: #f4efef;
 
   /* Typography */
-  --text-primary: #0a0a0b;
-  --text-secondary: #596273;
-  --text-muted: #8a93a3;
+  --text-primary: #302832;
+  --text-secondary: #706670;
+  --text-muted: #887b86;
 
   /* Borders */
-  --border: #e3e7ed;
-  --border-strong: #cdd3dc;
+  --border: #e4d9df;
+  --border-strong: #ccb9c5;
 
   /* Functional */
-  --success: #16a36a;
-  --warning: #f5a623;
+  --success: #36704e;
+  --warning: #ba8124;
   --danger: #e5484d;
 
   /* Focus */
-  --focus: rgba(23, 105, 245, 0.22);
+  --focus: rgba(84, 45, 70, 0.25);
 
   /* Backwards-compatible aliases used by the shared component system. */
   --ink: var(--text-primary);
@@ -45,7 +45,7 @@
   --muted: var(--text-secondary);
   --line: var(--border);
   --terra: var(--primary-hover);
-  --serif: "Lora", Georgia, serif;
+  --serif: "Fraunces", Georgia, serif;
 }
 * {
   box-sizing: border-box;
@@ -58,7 +58,7 @@ body {
   margin: 0 !important;
   color: var(--ink) !important;
   background: var(--paper) !important;
-  font-family: "DM Sans", Arial, sans-serif !important;
+  font-family: "Manrope", Arial, sans-serif !important;
   font-size: 16px;
   line-height: 1.6;
 }

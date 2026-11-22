@@ -93,11 +93,11 @@ const MediaProfileEditView = ({
 
   // Generate fallback image
   const profileImageFallback = formData.name
-    ? `https://placehold.co/200x200/1769F5/FFF?text=${formData.name
+    ? `https://placehold.co/200x200/F5E9ED/542D46?text=${formData.name
         .split(" ")
         .map((n) => n[0])
         .join("")}`
-    : "https://placehold.co/200x200/1769F5/FFF?text=M";
+    : "https://placehold.co/200x200/F5E9ED/542D46?text=M";
 
   return (
     <div className="page-container profile-editor">

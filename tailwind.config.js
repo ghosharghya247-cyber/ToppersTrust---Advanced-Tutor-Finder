@@ -147,13 +147,12 @@ module.exports = {
         "Padding-sm": "8px",
       },
     fontFamily: {
-      // This sets 'Roboto' as the default font for your entire website.
-      // Any text element will now use Roboto automatically.
-      sans: ['DM Sans', 'Arial', 'sans-serif'],
+      // Shared education marketplace typography.
+      sans: ['Manrope', 'Arial', 'sans-serif'],
 
       // (Optional) You can keep a second font for special, large headings.
       // To use it, you would add the class "font-display" to a heading element.
-      display: ['Lora', 'Georgia', 'serif'],
+      display: ['Fraunces', 'Georgia', 'serif'],
     },
 
       borderRadius: {

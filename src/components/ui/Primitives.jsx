@@ -23,7 +23,7 @@ export function Brand() {
       </span>
       <span>
         Toppers<span className="brand-light">Trust</span>
-        <small>ROOM TO GROW.</small>
+        <small>A good place to grow</small>
       </span>
     </Link>
   );
@@ -51,7 +51,7 @@ export function PageHeading({ eyebrow, title, description, children }) {
   return (
     <div className="page-heading">
       <div>
-        {eyebrow && <p className="eyebrow">{eyebrow}</p>}
+        {eyebrow && <p className="eyebrow">{eyebrow.charAt(0) + eyebrow.slice(1).toLowerCase()}</p>}
         <h1>{title}</h1>
         {description && <p className="page-description">{description}</p>}
       </div>

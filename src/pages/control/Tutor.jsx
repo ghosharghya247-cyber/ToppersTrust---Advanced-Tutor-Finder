@@ -274,7 +274,7 @@ export default function TutorController() {
   };
 
   const profileImageFallback =
-    "https://placehold.co/150x200/1769F5/FFF?text=" +
+    "https://placehold.co/150x200/F5E9ED/542D46?text=" +
     (tutorData.name && tutorData.name !== "Loading..."
       ? tutorData.name
           .split(" ")

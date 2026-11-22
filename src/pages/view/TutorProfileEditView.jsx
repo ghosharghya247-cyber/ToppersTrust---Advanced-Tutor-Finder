@@ -743,7 +743,7 @@ const TutorProfileEditView = ({
 
   // Profile image fallback
   const profileImageFallback =
-    "https://placehold.co/200x200/1769F5/FFF?text=" +
+    "https://placehold.co/200x200/F5E9ED/542D46?text=" +
     (formData.name
       ? formData.name
           .split(" ")

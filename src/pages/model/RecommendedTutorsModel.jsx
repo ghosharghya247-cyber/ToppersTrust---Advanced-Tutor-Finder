@@ -80,6 +80,12 @@ class RecommendedTutorsModel {
                         hscInfo: `HSC Grade: ${t.hsc_grade || 'N/A'}`,
                         profileImageUrl: imageUrl,
                         experience_years: t.experience_years,
+                        preferred_subjects: t.preferred_subjects,
+                        preferred_classes: t.preferred_classes,
+                        medium: t.medium,
+                        gender: t.gender,
+                        tutoring_method: t.tutoring_method,
+                        tutoring_style: t.tutoring_style,
                         expectedSalary: t.expected_salary,
                         availableTime: t.available_time,
                     };

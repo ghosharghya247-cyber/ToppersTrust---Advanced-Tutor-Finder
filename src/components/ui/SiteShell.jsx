@@ -13,7 +13,6 @@ import {
   Wallet,
   Building2,
   Search,
-  ShieldCheck,
 } from "lucide-react";
 import { supabase } from "../../supabase";
 import { Brand, Avatar } from "./Primitives";
@@ -113,7 +112,7 @@ export default function SiteShell({ children }) {
                 className="button button-primary button-small"
                 to="/sign-up-frame"
               >
-                Get started <ArrowRight size={15} />
+                Get started
               </Link>
             </>
           )}
@@ -152,7 +151,7 @@ export default function SiteShell({ children }) {
       )}
       {workspace && (
         <aside className="workspace-sidebar">
-          <p className="sidebar-label">YOUR LEARNING SPACE</p>
+          <p className="sidebar-label">Your learning space</p>
           <nav aria-label="Workspace">
             {items.map(([label, path, Icon]) => (
               <NavLink key={path} end={path.endsWith("dashboard")} to={path}>
@@ -198,9 +197,9 @@ export default function SiteShell({ children }) {
       <footer className="site-footer">
         <span>© {new Date().getFullYear()} ToppersTrust</span>
         <span className="footer-note">
-          <ShieldCheck size={15} /> Built around better learning.
+          <BookOpen size={16} /> Good guidance. Growing confidence.
         </span>
-        <Link to="/terms-and-conditions">Terms & privacy</Link>
+        <Link to="/terms-and-conditions">Terms & conditions</Link>
       </footer>
     </div>
   );
